@@ -20,6 +20,8 @@
     "publish": "lerna publish"
   },
   "dependencies": {
+    "@aeaton/prosemirror-footnotes": "^0.0.3",
+    "@aeaton/prosemirror-placeholder": "^0.0.4",
     "@fortawesome/fontawesome": "^1.1.2",
     "@fortawesome/fontawesome-free-solid": "^5.0.4",
     "@fortawesome/react-fontawesome": "^0.0.17",
