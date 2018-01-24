@@ -18,5 +18,24 @@
   "scripts": {
     "build": "lerna run build --toposort --concurrency=1",
     "publish": "lerna publish"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.2",
+    "@fortawesome/fontawesome-free-solid": "^5.0.4",
+    "@fortawesome/react-fontawesome": "^0.0.17",
+    "prosemirror-commands": "^1.0.0",
+    "prosemirror-dropcursor": "^1.0.0",
+    "prosemirror-gapcursor": "^1.0.0",
+    "prosemirror-history": "^1.0.0",
+    "prosemirror-inputrules": "^1.0.1",
+    "prosemirror-keymap": "^1.0.0",
+    "prosemirror-model": "^1.0.0",
+    "prosemirror-schema-basic": "^1.0.0",
+    "prosemirror-schema-list": "^1.0.0",
+    "prosemirror-tables": "^0.6.1",
+    "classnames": "^2.2.5",
+    "lodash": "^4.17.4",
+    "prosemirror-state": "^1.0.1",
+    "prosemirror-view": "^1.0.0"
   }
 }
