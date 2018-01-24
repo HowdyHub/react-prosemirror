@@ -1,4 +1,5 @@
 {
+  "name": "@howdytesting",
   "private": true,
   "license": "MIT",
   "devDependencies": {
