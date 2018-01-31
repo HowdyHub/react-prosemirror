@@ -180,7 +180,7 @@ var promptForURL = exports.promptForURL = function promptForURL() {
   var url = window && window.prompt('Enter the URL', 'https://');
 
   if (url && !/^https?:\/\//i.test(url)) {
-    url = 'http://' + url;
+    url = 'https://' + url;
   }
 
   return url;
@@ -352,14 +352,26 @@ var isOldIE = memoize(function () {
 	return window && document && document.all && !window.atob;
 });
 
+var getTarget = function (target) {
+  return document.querySelector(target);
+};
+
 var getElement = (function (fn) {
 	var memo = {};
 
-	return function(selector) {
-		if (typeof memo[selector] === "undefined") {
-			var styleTarget = fn.call(this, selector);
+	return function(target) {
+                // If passing function in options, then use it for resolve "head" element.
+                // Useful for Shadow Root style i.e
+                // {
+                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
+                // }
+                if (typeof target === 'function') {
+                        return target();
+                }
+                if (typeof memo[target] === "undefined") {
+			var styleTarget = getTarget.call(this, target);
 			// Special case to return head of iframe instead of iframe itself
-			if (styleTarget instanceof window.HTMLIFrameElement) {
+			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
 				try {
 					// This will throw an exception if access to iframe is blocked
 					// due to cross-origin restrictions
@@ -368,13 +380,11 @@ var getElement = (function (fn) {
 					styleTarget = null;
 				}
 			}
-			memo[selector] = styleTarget;
+			memo[target] = styleTarget;
 		}
-		return memo[selector]
+		return memo[target]
 	};
-})(function (target) {
-	return document.querySelector(target)
-});
+})();
 
 var singleton = null;
 var	singletonCounter = 0;
@@ -396,7 +406,7 @@ module.exports = function(list, options) {
 	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
 
 	// By default, add <style> tags to the <head> element
-	if (!options.insertInto) options.insertInto = "head";
+        if (!options.insertInto) options.insertInto = "head";
 
 	// By default, add <style> tags to the bottom of the target
 	if (!options.insertAt) options.insertAt = "bottom";
@@ -1042,18 +1052,32 @@ var generic = function generic(schema) {
     },
     h1: {
       title: 'Change to heading level 1',
-      content: _icons2.default.heading,
+      content: 'H1',
       active: (0, _helpers.blockActive)(schema.nodes.heading, { level: 1 }),
       enable: (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 1 }),
       run: (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 1 })
     },
-    // h2: {
-    //   title: 'Change to heading level 2',
-    //   content: 'H2',
-    //   active: blockActive(schema.nodes.heading, { level: 2 }),
-    //   enable: setBlockType(schema.nodes.heading, { level: 2 }),
-    //   run: setBlockType(schema.nodes.heading, { level: 2 })
-    // },
+    h2: {
+      title: 'Change to heading level 2',
+      content: 'H2',
+      active: (0, _helpers.blockActive)(schema.nodes.heading, { level: 2 }),
+      enable: (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 2 }),
+      run: (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 2 })
+    },
+    h3: {
+      title: 'Change to heading level 3',
+      content: 'H3',
+      active: (0, _helpers.blockActive)(schema.nodes.heading, { level: 3 }),
+      enable: (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 3 }),
+      run: (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 3 })
+    },
+    h4: {
+      title: 'Change to heading level 4',
+      content: 'H4',
+      active: (0, _helpers.blockActive)(schema.nodes.heading, { level: 4 }),
+      enable: (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 4 }),
+      run: (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 4 })
+    },
     blockquote: {
       title: 'Wrap in block quote',
       content: _icons2.default.blockquote,
@@ -1419,30 +1443,49 @@ module.exports = require("@aeaton/prosemirror-placeholder");
 /* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
 
-// load the styles
 var content = __webpack_require__(30);
+
 if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
+
 var transform;
+var insertInto;
+
+
 
 var options = {"hmr":true}
+
 options.transform = transform
-// add the styles to the DOM
+options.insertInto = undefined;
+
 var update = __webpack_require__(10)(content, options);
+
 if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
+
 if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../css-loader/index.js!./tables.css", function() {
-			var newContent = require("!!../../css-loader/index.js!./tables.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
+	module.hot.accept("!!../../css-loader/index.js!./tables.css", function() {
+		var newContent = require("!!../../css-loader/index.js!./tables.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
 	module.hot.dispose(function() { update(); });
 }
 
@@ -1559,30 +1602,49 @@ module.exports = function (css) {
 /* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
 
-// load the styles
 var content = __webpack_require__(33);
+
 if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
+
 var transform;
+var insertInto;
+
+
 
 var options = {"hmr":true}
+
 options.transform = transform
-// add the styles to the DOM
+options.insertInto = undefined;
+
 var update = __webpack_require__(10)(content, options);
+
 if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
+
 if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../css-loader/index.js!./gapcursor.css", function() {
-			var newContent = require("!!../../css-loader/index.js!./gapcursor.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
+	module.hot.accept("!!../../css-loader/index.js!./gapcursor.css", function() {
+		var newContent = require("!!../../css-loader/index.js!./gapcursor.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
 	module.hot.dispose(function() { update(); });
 }
 
@@ -1676,16 +1738,20 @@ var keys = function keys(schema) {
   };
 };
 
-Object.keys(_prosemirrorCommands.baseKeymap).forEach(function (key) {
-  if (keys[key]) {
-    keys[key] = (0, _prosemirrorCommands.chainCommands)(keys[key], _prosemirrorCommands.baseKeymap[key]);
-  } else {
-    keys[key] = _prosemirrorCommands.baseKeymap[key];
-  }
-});
+var joinCustomWithBase = function joinCustomWithBase(customKeys) {
+  Object.keys(_prosemirrorCommands.baseKeymap).forEach(function (key) {
+    if (customKeys[key]) {
+      customKeys[key] = (0, _prosemirrorCommands.chainCommands)(customKeys[key], _prosemirrorCommands.baseKeymap[key]);
+    } else {
+      customKeys[key] = _prosemirrorCommands.baseKeymap[key];
+    }
+  });
+
+  return customKeys;
+};
 
 exports.default = function (schema) {
-  return (0, _prosemirrorKeymap.keymap)(keys(schema));
+  return (0, _prosemirrorKeymap.keymap)(joinCustomWithBase(keys(schema)));
 };
 
 /***/ }),
