@@ -744,8 +744,14 @@ var schemas = {
   html: _schema2.default
 }; // An example setup, adapted from prosemirror-example-setup
 
-var options = exports.options = function options(docType) {
-  var schema = schemas[docType];
+var options = exports.options = function options() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref$docType = _ref.docType,
+      docType = _ref$docType === undefined ? 'html' : _ref$docType,
+      _ref$customSchema = _ref.customSchema,
+      customSchema = _ref$customSchema === undefined ? null : _ref$customSchema;
+
+  var schema = customSchema || schemas[docType];
 
   return {
     plugins: (0, _plugins2.default)(docType, schema),
@@ -753,9 +759,18 @@ var options = exports.options = function options(docType) {
   };
 };
 
-var menu = exports.menu = function menu(docType) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return (0, _menu2.default)(docType, schemas[docType], options);
+var menu = exports.menu = function menu() {
+  var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref2$docType = _ref2.docType,
+      docType = _ref2$docType === undefined ? 'html' : _ref2$docType,
+      _ref2$options = _ref2.options,
+      options = _ref2$options === undefined ? {} : _ref2$options,
+      _ref2$customSchema = _ref2.customSchema,
+      customSchema = _ref2$customSchema === undefined ? null : _ref2$customSchema;
+
+  var schema = customSchema || schemas[docType];
+
+  return (0, _menu2.default)(docType, schema, options);
 };
 
 exports.defaultMarkdownParser = _prosemirrorMarkdown.defaultMarkdownParser;
@@ -803,10 +818,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var PluginBuilder = function () {
-  function PluginBuilder(schemaType, schema) {
+  function PluginBuilder(docType, schema) {
     _classCallCheck(this, PluginBuilder);
 
-    this.schemaType = schemaType;
+    this.docType = docType;
     this.schema = schema;
   }
 
@@ -815,7 +830,7 @@ var PluginBuilder = function () {
     value: function build() {
       var plugins = [(0, _keys2.default)(this.schema), (0, _prosemirrorHistory.history)(), (0, _prosemirrorPlaceholder.placeholder)({ content: 'Start typing…' }), (0, _prosemirrorDropcursor.dropCursor)(), (0, _prosemirrorGapcursor.gapCursor)()];
 
-      if (this.schemaType === 'html') {
+      if (this.docType === 'html') {
         plugins.concat([_rules2.default, (0, _prosemirrorFootnotes.footnotes)(), (0, _prosemirrorTables.columnResizing)(), (0, _prosemirrorTables.tableEditing)()]);
 
         // for tables
@@ -830,8 +845,8 @@ var PluginBuilder = function () {
   return PluginBuilder;
 }();
 
-exports.default = function (schemaType, schema) {
-  return new PluginBuilder(schemaType, schema).build();
+exports.default = function (docType, schema) {
+  return new PluginBuilder(docType, schema).build();
 };
 
 /***/ }),
@@ -1352,10 +1367,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var MenuBuilder = function () {
-  function MenuBuilder(schemaType, schema) {
+  function MenuBuilder(docType, schema) {
     _classCallCheck(this, MenuBuilder);
 
-    this.schemaType = schemaType;
+    this.docType = docType;
     this.schema = schema;
   }
 
@@ -1389,7 +1404,7 @@ var MenuBuilder = function () {
         for (var _iterator = Object.keys(options)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var category = _step.value;
 
-          menuConfig[category] = this.pick.apply(this, [(0, _menuItems2.default)(this.schemaType, this.schema)(category)].concat(_toConsumableArray(options[category])));
+          menuConfig[category] = this.pick.apply(this, [(0, _menuItems2.default)(this.docType, this.schema)(category)].concat(_toConsumableArray(options[category])));
         }
       } catch (err) {
         _didIteratorError = true;
@@ -1449,14 +1464,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var items = { marks: _marks2.default, blocks: _blocks2.default, inserts: _inserts2.default, history: _history2.default };
 
-exports.default = function (schemaType, schema) {
+exports.default = function (docType, schema) {
   return function (itemsCategory) {
     var _items$itemsCategory = items[itemsCategory],
         generic = _items$itemsCategory.generic,
         htmlSpecific = _items$itemsCategory.htmlSpecific;
 
 
-    return schemaType === 'html' ? Object.assign(generic(schema), htmlSpecific(schema)) : generic(schema);
+    return docType === 'html' ? Object.assign(generic(schema), htmlSpecific(schema)) : generic(schema);
   };
 };
 
