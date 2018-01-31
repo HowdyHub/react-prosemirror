@@ -61,7 +61,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -75,15 +75,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(16);
+var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactFontawesome = __webpack_require__(17);
+var _reactFontawesome = __webpack_require__(18);
 
 var _reactFontawesome2 = _interopRequireDefault(_reactFontawesome);
 
-var _fontawesomeFreeSolid = __webpack_require__(18);
+var _fontawesomeFreeSolid = __webpack_require__(19);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -200,12 +200,6 @@ module.exports = require("prosemirror-history");
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("prosemirror-tables");
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -215,19 +209,25 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _prosemirrorModel = __webpack_require__(22);
+var _prosemirrorModel = __webpack_require__(23);
 
-var _nodes = __webpack_require__(23);
+var _nodes = __webpack_require__(24);
 
 var _nodes2 = _interopRequireDefault(_nodes);
 
-var _marks = __webpack_require__(24);
+var _marks = __webpack_require__(25);
 
 var _marks2 = _interopRequireDefault(_marks);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = new _prosemirrorModel.Schema({ nodes: _nodes2.default, marks: _marks2.default });
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("prosemirror-tables");
 
 /***/ }),
 /* 7 */
@@ -243,6 +243,12 @@ module.exports = require("@aeaton/prosemirror-footnotes");
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports) {
+
+module.exports = require("prosemirror-markdown");
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports) {
 
 /*
@@ -324,7 +330,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -390,7 +396,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(31);
+var	fixUrls = __webpack_require__(32);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -706,53 +712,10 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("prosemirror-inputrules");
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.schema = exports.menu = exports.options = undefined;
-
-var _menu = __webpack_require__(13);
-
-Object.defineProperty(exports, 'menu', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_menu).default;
-  }
-});
-
-var _schema = __webpack_require__(6);
-
-Object.defineProperty(exports, 'schema', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_schema).default;
-  }
-});
-
-var _plugins = __webpack_require__(25);
-
-var _plugins2 = _interopRequireDefault(_plugins);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var options = exports.options = function options(schemaType, schema) {
-  return {
-    plugins: (0, _plugins2.default)(schemaType, schema),
-    schema: schema
-  };
-}; // An example setup, adapted from prosemirror-example-setup
 
 /***/ }),
 /* 13 */
@@ -764,12 +727,75 @@ var options = exports.options = function options(schemaType, schema) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.defaultMarkdownSerializer = exports.defaultMarkdownParser = exports.schema = exports.menu = exports.options = undefined;
+
+var _menu = __webpack_require__(14);
+
+Object.defineProperty(exports, 'menu', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_menu).default;
+  }
+});
+
+var _schema = __webpack_require__(5);
+
+Object.defineProperty(exports, 'schema', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_schema).default;
+  }
+});
+
+var _plugins = __webpack_require__(26);
+
+var _plugins2 = _interopRequireDefault(_plugins);
+
+var _schema2 = _interopRequireDefault(_schema);
+
+var _prosemirrorMarkdown = __webpack_require__(9);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var schemas = {
+  markdown: _prosemirrorMarkdown.schema,
+  html: _schema2.default
+}; // An example setup, adapted from prosemirror-example-setup
+
+var options = exports.options = function options(docType) {
+  var schema = schemas[docType];
+
+  return {
+    plugins: (0, _plugins2.default)(docType, schema),
+    schema: schema
+  };
+};
+
+exports.defaultMarkdownParser = _prosemirrorMarkdown.defaultMarkdownParser;
+exports.defaultMarkdownSerializer = _prosemirrorMarkdown.defaultMarkdownSerializer;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _menuItems = __webpack_require__(14);
+var _menuItems = __webpack_require__(15);
 
 var _menuItems2 = _interopRequireDefault(_menuItems);
+
+var _schema = __webpack_require__(5);
+
+var _schema2 = _interopRequireDefault(_schema);
+
+var _prosemirrorMarkdown = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -839,13 +865,18 @@ var MenuBuilder = function () {
   return MenuBuilder;
 }();
 
-exports.default = function (schemaType, schema) {
-  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  return new MenuBuilder(schemaType, schema).build(options);
+var schemas = {
+  markdown: _prosemirrorMarkdown.schema,
+  html: _schema2.default
+};
+
+exports.default = function (docType) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return new MenuBuilder(docType, schemas[docType]).build(options);
 };
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -855,19 +886,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _marks = __webpack_require__(15);
+var _marks = __webpack_require__(16);
 
 var _marks2 = _interopRequireDefault(_marks);
 
-var _blocks = __webpack_require__(19);
+var _blocks = __webpack_require__(20);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
-var _inserts = __webpack_require__(20);
+var _inserts = __webpack_require__(21);
 
 var _inserts2 = _interopRequireDefault(_inserts);
 
-var _history = __webpack_require__(21);
+var _history = __webpack_require__(22);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -887,7 +918,7 @@ exports.default = function (schemaType, schema) {
 };
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -982,25 +1013,25 @@ var generic = function generic(schema) {
 exports.default = { generic: generic, htmlSpecific: htmlSpecific };
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = require("react");
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = require("@fortawesome/react-fontawesome");
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("@fortawesome/fontawesome-free-solid");
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1117,7 +1148,7 @@ var generic = function generic(schema) {
 exports.default = { generic: generic, htmlSpecific: htmlSpecific };
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1206,7 +1237,7 @@ var generic = function generic(schema) {
 exports.default = { generic: generic, htmlSpecific: htmlSpecific };
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1246,13 +1277,13 @@ var generic = function generic(schema) {
 exports.default = { generic: generic, htmlSpecific: htmlSpecific };
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = require("prosemirror-model");
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1268,7 +1299,7 @@ var _prosemirrorSchemaBasic = __webpack_require__(7);
 
 var _prosemirrorSchemaList = __webpack_require__(3);
 
-var _prosemirrorTables = __webpack_require__(5);
+var _prosemirrorTables = __webpack_require__(6);
 
 var _prosemirrorFootnotes = __webpack_require__(8);
 
@@ -1293,7 +1324,7 @@ exports.default = _extends({}, _prosemirrorSchemaBasic.nodes, listNodes, (0, _pr
 }), _prosemirrorFootnotes.footnoteNodes);
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1349,7 +1380,7 @@ exports.default = _extends({}, _prosemirrorSchemaBasic.marks, {
 });
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1363,25 +1394,25 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _prosemirrorHistory = __webpack_require__(4);
 
-var _prosemirrorDropcursor = __webpack_require__(26);
+var _prosemirrorDropcursor = __webpack_require__(27);
 
-var _prosemirrorGapcursor = __webpack_require__(27);
+var _prosemirrorGapcursor = __webpack_require__(28);
 
-var _prosemirrorTables = __webpack_require__(5);
+var _prosemirrorTables = __webpack_require__(6);
 
-var _prosemirrorPlaceholder = __webpack_require__(28);
+var _prosemirrorPlaceholder = __webpack_require__(29);
 
 var _prosemirrorFootnotes = __webpack_require__(8);
 
-__webpack_require__(29);
+__webpack_require__(30);
 
-__webpack_require__(32);
+__webpack_require__(33);
 
-var _keys = __webpack_require__(34);
+var _keys = __webpack_require__(35);
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _rules = __webpack_require__(36);
+var _rules = __webpack_require__(37);
 
 var _rules2 = _interopRequireDefault(_rules);
 
@@ -1422,29 +1453,29 @@ exports.default = function (schemaType, schema) {
 };
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 module.exports = require("prosemirror-dropcursor");
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 module.exports = require("prosemirror-gapcursor");
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
 module.exports = require("@aeaton/prosemirror-placeholder");
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(30);
+var content = __webpack_require__(31);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -1458,7 +1489,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(10)(content, options);
+var update = __webpack_require__(11)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -1490,10 +1521,10 @@ if(false) {
 }
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(9)(false);
+exports = module.exports = __webpack_require__(10)(false);
 // imports
 
 
@@ -1504,7 +1535,7 @@ exports.push([module.i, ".ProseMirror .tableWrapper {\n  overflow-x: auto;\n}\n.
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 
@@ -1599,11 +1630,11 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(33);
+var content = __webpack_require__(34);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -1617,7 +1648,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(10)(content, options);
+var update = __webpack_require__(11)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -1649,10 +1680,10 @@ if(false) {
 }
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(9)(false);
+exports = module.exports = __webpack_require__(10)(false);
 // imports
 
 
@@ -1663,7 +1694,7 @@ exports.push([module.i, ".ProseMirror-gapcursor {\n  display: none;\n  pointer-e
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1673,15 +1704,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _prosemirrorKeymap = __webpack_require__(35);
+var _prosemirrorKeymap = __webpack_require__(36);
 
-var _prosemirrorInputrules = __webpack_require__(11);
+var _prosemirrorInputrules = __webpack_require__(12);
 
 var _prosemirrorHistory = __webpack_require__(4);
 
 var _prosemirrorSchemaList = __webpack_require__(3);
 
-var _prosemirrorTables = __webpack_require__(5);
+var _prosemirrorTables = __webpack_require__(6);
 
 var _prosemirrorCommands = __webpack_require__(1);
 
@@ -1755,13 +1786,13 @@ exports.default = function (schema) {
 };
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports) {
 
 module.exports = require("prosemirror-keymap");
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1771,9 +1802,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _prosemirrorInputrules = __webpack_require__(11);
+var _prosemirrorInputrules = __webpack_require__(12);
 
-var _schema = __webpack_require__(6);
+var _schema = __webpack_require__(5);
 
 var _schema2 = _interopRequireDefault(_schema);
 
