@@ -61,7 +61,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -75,15 +75,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(17);
+var _react = __webpack_require__(32);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactFontawesome = __webpack_require__(18);
+var _reactFontawesome = __webpack_require__(33);
 
 var _reactFontawesome2 = _interopRequireDefault(_reactFontawesome);
 
-var _fontawesomeFreeSolid = __webpack_require__(19);
+var _fontawesomeFreeSolid = __webpack_require__(34);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -117,10 +117,28 @@ exports.default = {
 /* 1 */
 /***/ (function(module, exports) {
 
-module.exports = require("prosemirror-commands");
+module.exports = require("prosemirror-history");
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("prosemirror-tables");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("prosemirror-schema-list");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("prosemirror-commands");
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -187,68 +205,13 @@ var promptForURL = exports.promptForURL = function promptForURL() {
 };
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("prosemirror-schema-list");
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("prosemirror-history");
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _prosemirrorModel = __webpack_require__(23);
-
-var _nodes = __webpack_require__(24);
-
-var _nodes2 = _interopRequireDefault(_nodes);
-
-var _marks = __webpack_require__(25);
-
-var _marks2 = _interopRequireDefault(_marks);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = new _prosemirrorModel.Schema({ nodes: _nodes2.default, marks: _marks2.default });
-
-/***/ }),
 /* 6 */
-/***/ (function(module, exports) {
-
-module.exports = require("prosemirror-tables");
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = require("prosemirror-schema-basic");
-
-/***/ }),
-/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("@aeaton/prosemirror-footnotes");
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-module.exports = require("prosemirror-markdown");
-
-/***/ }),
-/* 10 */
+/* 7 */
 /***/ (function(module, exports) {
 
 /*
@@ -330,7 +293,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 11 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -396,7 +359,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(32);
+var	fixUrls = __webpack_require__(19);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -712,13 +675,13 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 12 */
+/* 9 */
 /***/ (function(module, exports) {
 
 module.exports = require("prosemirror-inputrules");
 
 /***/ }),
-/* 13 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -727,33 +690,52 @@ module.exports = require("prosemirror-inputrules");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.defaultMarkdownSerializer = exports.defaultMarkdownParser = exports.schema = exports.menu = exports.options = undefined;
 
-var _menu = __webpack_require__(14);
+var _prosemirrorModel = __webpack_require__(25);
 
-Object.defineProperty(exports, 'menu', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_menu).default;
-  }
+var _nodes = __webpack_require__(26);
+
+var _nodes2 = _interopRequireDefault(_nodes);
+
+var _marks = __webpack_require__(27);
+
+var _marks2 = _interopRequireDefault(_marks);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = new _prosemirrorModel.Schema({ nodes: _nodes2.default, marks: _marks2.default });
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+module.exports = require("prosemirror-schema-basic");
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
+exports.defaultMarkdownSerializer = exports.defaultMarkdownParser = exports.menu = exports.options = undefined;
 
-var _schema = __webpack_require__(5);
-
-Object.defineProperty(exports, 'schema', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_schema).default;
-  }
-});
-
-var _plugins = __webpack_require__(26);
+var _plugins = __webpack_require__(13);
 
 var _plugins2 = _interopRequireDefault(_plugins);
 
+var _schema = __webpack_require__(10);
+
 var _schema2 = _interopRequireDefault(_schema);
 
-var _prosemirrorMarkdown = __webpack_require__(9);
+var _prosemirrorMarkdown = __webpack_require__(28);
+
+var _menu = __webpack_require__(29);
+
+var _menu2 = _interopRequireDefault(_menu);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -771,11 +753,16 @@ var options = exports.options = function options(docType) {
   };
 };
 
+var menu = exports.menu = function menu(docType) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return (0, _menu2.default)(docType, schemas[docType], options);
+};
+
 exports.defaultMarkdownParser = _prosemirrorMarkdown.defaultMarkdownParser;
 exports.defaultMarkdownSerializer = _prosemirrorMarkdown.defaultMarkdownSerializer;
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -787,15 +774,576 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _menuItems = __webpack_require__(15);
+var _prosemirrorHistory = __webpack_require__(1);
 
-var _menuItems2 = _interopRequireDefault(_menuItems);
+var _prosemirrorDropcursor = __webpack_require__(14);
 
-var _schema = __webpack_require__(5);
+var _prosemirrorGapcursor = __webpack_require__(15);
+
+var _prosemirrorTables = __webpack_require__(2);
+
+var _prosemirrorPlaceholder = __webpack_require__(16);
+
+var _prosemirrorFootnotes = __webpack_require__(6);
+
+__webpack_require__(17);
+
+__webpack_require__(20);
+
+var _keys = __webpack_require__(22);
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _rules = __webpack_require__(24);
+
+var _rules2 = _interopRequireDefault(_rules);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var PluginBuilder = function () {
+  function PluginBuilder(schemaType, schema) {
+    _classCallCheck(this, PluginBuilder);
+
+    this.schemaType = schemaType;
+    this.schema = schema;
+  }
+
+  _createClass(PluginBuilder, [{
+    key: 'build',
+    value: function build() {
+      var plugins = [(0, _keys2.default)(this.schema), (0, _prosemirrorHistory.history)(), (0, _prosemirrorPlaceholder.placeholder)({ content: 'Start typing…' }), (0, _prosemirrorDropcursor.dropCursor)(), (0, _prosemirrorGapcursor.gapCursor)()];
+
+      if (this.schemaType === 'html') {
+        plugins.concat([_rules2.default, (0, _prosemirrorFootnotes.footnotes)(), (0, _prosemirrorTables.columnResizing)(), (0, _prosemirrorTables.tableEditing)()]);
+
+        // for tables
+        document.execCommand('enableObjectResizing', false, false);
+        document.execCommand('enableInlineTableEditing', false, false);
+      }
+
+      return plugins;
+    }
+  }]);
+
+  return PluginBuilder;
+}();
+
+exports.default = function (schemaType, schema) {
+  return new PluginBuilder(schemaType, schema).build();
+};
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = require("prosemirror-dropcursor");
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = require("prosemirror-gapcursor");
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+module.exports = require("@aeaton/prosemirror-placeholder");
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(18);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(8)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {
+	module.hot.accept("!!../../css-loader/index.js!./tables.css", function() {
+		var newContent = require("!!../../css-loader/index.js!./tables.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".ProseMirror .tableWrapper {\n  overflow-x: auto;\n}\n.ProseMirror table {\n  border-collapse: collapse;\n  table-layout: fixed;\n  width: 100%;\n  overflow: hidden;\n}\n.ProseMirror td, .ProseMirror th {\n  vertical-align: top;\n  box-sizing: border-box;\n  position: relative;\n}\n.ProseMirror .column-resize-handle {\n  position: absolute;\n  right: -2px; top: 0; bottom: 0;\n  width: 4px;\n  z-index: 20;\n  background-color: #adf;\n  pointer-events: none;\n}\n.ProseMirror.resize-cursor {\n  cursor: ew-resize;\n  cursor: col-resize;\n}\n/* Give selected cells a blue overlay */\n.ProseMirror .selectedCell:after {\n  z-index: 2;\n  position: absolute;\n  content: \"\";\n  left: 0; right: 0; top: 0; bottom: 0;\n  background: rgba(200, 200, 255, 0.4);\n  pointer-events: none;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports) {
+
+
+/**
+ * When source maps are enabled, `style-loader` uses a link element with a data-uri to
+ * embed the css on the page. This breaks all relative urls because now they are relative to a
+ * bundle instead of the current page.
+ *
+ * One solution is to only use full urls, but that may be impossible.
+ *
+ * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
+ *
+ * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
+ *
+ */
+
+module.exports = function (css) {
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
+
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  }
+
+	// blank or null?
+	if (!css || typeof css !== "string") {
+	  return css;
+  }
+
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
+
+	// convert each url(...)
+	/*
+	This regular expression is just a way to recursively match brackets within
+	a string.
+
+	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+	   (  = Start a capturing group
+	     (?:  = Start a non-capturing group
+	         [^)(]  = Match anything that isn't a parentheses
+	         |  = OR
+	         \(  = Match a start parentheses
+	             (?:  = Start another non-capturing groups
+	                 [^)(]+  = Match anything that isn't a parentheses
+	                 |  = OR
+	                 \(  = Match a start parentheses
+	                     [^)(]*  = Match anything that isn't a parentheses
+	                 \)  = Match a end parentheses
+	             )  = End Group
+              *\) = Match anything and then a close parens
+          )  = Close non-capturing group
+          *  = Match anything
+       )  = Close capturing group
+	 \)  = Match a close parens
+
+	 /gi  = Get all matches, not the first.  Be case insensitive.
+	 */
+	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
+		// strip quotes (if they exist)
+		var unquotedOrigUrl = origUrl
+			.trim()
+			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
+			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
+
+		// already a full url? no change
+		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(unquotedOrigUrl)) {
+		  return fullMatch;
+		}
+
+		// convert the url to a full url
+		var newUrl;
+
+		if (unquotedOrigUrl.indexOf("//") === 0) {
+		  	//TODO: should we add protocol?
+			newUrl = unquotedOrigUrl;
+		} else if (unquotedOrigUrl.indexOf("/") === 0) {
+			// path should be relative to the base url
+			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+		} else {
+			// path should be relative to current directory
+			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+		}
+
+		// send back the fixed url(...)
+		return "url(" + JSON.stringify(newUrl) + ")";
+	});
+
+	// send back the fixed css
+	return fixedCss;
+};
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(21);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(8)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {
+	module.hot.accept("!!../../css-loader/index.js!./gapcursor.css", function() {
+		var newContent = require("!!../../css-loader/index.js!./gapcursor.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".ProseMirror-gapcursor {\n  display: none;\n  pointer-events: none;\n  position: absolute;\n}\n\n.ProseMirror-gapcursor:after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: -2px;\n  width: 20px;\n  border-top: 1px solid black;\n  animation: ProseMirror-cursor-blink 1.1s steps(2, start) infinite;\n}\n\n@keyframes ProseMirror-cursor-blink {\n  to {\n    visibility: hidden;\n  }\n}\n\n.ProseMirror-focused .ProseMirror-gapcursor {\n  display: block;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _prosemirrorKeymap = __webpack_require__(23);
+
+var _prosemirrorInputrules = __webpack_require__(9);
+
+var _prosemirrorHistory = __webpack_require__(1);
+
+var _prosemirrorSchemaList = __webpack_require__(3);
+
+var _prosemirrorTables = __webpack_require__(2);
+
+var _prosemirrorCommands = __webpack_require__(4);
+
+var insertBreak = function insertBreak(schema) {
+  return function (state, dispatch) {
+    var br = schema.nodes.hard_break.create();
+    dispatch(state.tr.replaceSelectionWith(br).scrollIntoView());
+    return true;
+  };
+};
+
+var insertRule = function insertRule(schema) {
+  return function (state, dispatch) {
+    var hr = schema.nodes.horizontal_rule.create();
+    dispatch(state.tr.replaceSelectionWith(hr).scrollIntoView());
+    return true;
+  };
+};
+
+var keys = function keys(schema) {
+  return {
+    'Mod-z': _prosemirrorHistory.undo,
+    'Shift-Mod-z': _prosemirrorHistory.redo,
+    'Backspace': (0, _prosemirrorCommands.chainCommands)(_prosemirrorInputrules.undoInputRule, _prosemirrorCommands.deleteSelection),
+    'Mod-y': _prosemirrorHistory.redo,
+    'Alt-ArrowUp': _prosemirrorCommands.joinUp,
+    'Alt-ArrowDown': _prosemirrorCommands.joinDown,
+    'Mod-BracketLeft': _prosemirrorCommands.lift,
+    'Escape': _prosemirrorCommands.selectParentNode,
+    'Mod-b': (0, _prosemirrorCommands.toggleMark)(schema.marks.strong),
+    'Mod-i': (0, _prosemirrorCommands.toggleMark)(schema.marks.em),
+    'Mod-u': (0, _prosemirrorCommands.toggleMark)(schema.marks.underline),
+    'Mod-`': (0, _prosemirrorCommands.toggleMark)(schema.marks.code),
+    'Shift-Ctrl-8': (0, _prosemirrorSchemaList.wrapInList)(schema.nodes.bullet_list),
+    'Shift-Ctrl-9': (0, _prosemirrorSchemaList.wrapInList)(schema.nodes.ordered_list),
+    'Ctrl->': (0, _prosemirrorCommands.wrapIn)(schema.nodes.blockquote),
+    'Mod-Enter': (0, _prosemirrorCommands.chainCommands)(_prosemirrorCommands.exitCode, insertBreak(schema)),
+    'Shift-Enter': (0, _prosemirrorCommands.chainCommands)(_prosemirrorCommands.exitCode, insertBreak(schema)),
+    'Ctrl-Enter': (0, _prosemirrorCommands.chainCommands)(_prosemirrorCommands.exitCode, insertBreak(schema)), // mac-only?
+    'Enter': (0, _prosemirrorSchemaList.splitListItem)(schema.nodes.list_item),
+    'Mod-[': (0, _prosemirrorSchemaList.liftListItem)(schema.nodes.list_item),
+    'Mod-]': (0, _prosemirrorSchemaList.sinkListItem)(schema.nodes.list_item),
+    'Shift-Ctrl-0': (0, _prosemirrorCommands.setBlockType)(schema.nodes.paragraph),
+    'Shift-Ctrl-\\': (0, _prosemirrorCommands.setBlockType)(schema.nodes.code_block),
+    'Shift-Ctrl-1': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 1 }),
+    'Shift-Ctrl-2': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 2 }),
+    'Shift-Ctrl-3': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 3 }),
+    'Shift-Ctrl-4': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 4 }),
+    'Shift-Ctrl-5': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 5 }),
+    'Shift-Ctrl-6': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 6 }),
+    'Mod-_': insertRule(schema),
+    'Tab': (0, _prosemirrorTables.goToNextCell)(1),
+    'Shift-Tab': (0, _prosemirrorTables.goToNextCell)(-1)
+  };
+};
+
+var joinCustomWithBase = function joinCustomWithBase(customKeys) {
+  Object.keys(_prosemirrorCommands.baseKeymap).forEach(function (key) {
+    if (customKeys[key]) {
+      customKeys[key] = (0, _prosemirrorCommands.chainCommands)(customKeys[key], _prosemirrorCommands.baseKeymap[key]);
+    } else {
+      customKeys[key] = _prosemirrorCommands.baseKeymap[key];
+    }
+  });
+
+  return customKeys;
+};
+
+exports.default = function (schema) {
+  return (0, _prosemirrorKeymap.keymap)(joinCustomWithBase(keys(schema)));
+};
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+module.exports = require("prosemirror-keymap");
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _prosemirrorInputrules = __webpack_require__(9);
+
+var _schema = __webpack_require__(10);
 
 var _schema2 = _interopRequireDefault(_schema);
 
-var _prosemirrorMarkdown = __webpack_require__(9);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+exports.default = (0, _prosemirrorInputrules.inputRules)({
+  rules: [].concat(_toConsumableArray(_prosemirrorInputrules.smartQuotes), [_prosemirrorInputrules.ellipsis, _prosemirrorInputrules.emDash,
+
+  // > blockquote
+  (0, _prosemirrorInputrules.wrappingInputRule)(/^\s*>\s$/, _schema2.default.nodes.blockquote),
+
+  // 1. ordered list
+  (0, _prosemirrorInputrules.wrappingInputRule)(/^(\d+)\.\s$/, _schema2.default.nodes.ordered_list, function (match) {
+    return { order: +match[1] };
+  }, function (match, node) {
+    return node.childCount + node.attrs.order === +match[1];
+  }),
+
+  // * bullet list
+  (0, _prosemirrorInputrules.wrappingInputRule)(/^\s*([-+*])\s$/, _schema2.default.nodes.bullet_list),
+
+  // ``` code block
+  (0, _prosemirrorInputrules.textblockTypeInputRule)(/^```$/, _schema2.default.nodes.code_block),
+
+  // # heading
+  (0, _prosemirrorInputrules.textblockTypeInputRule)(new RegExp('^(#{1,6})\\s$'), _schema2.default.nodes.heading, function (match) {
+    return { level: match[1].length };
+  })])
+});
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports) {
+
+module.exports = require("prosemirror-model");
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _prosemirrorSchemaBasic = __webpack_require__(11);
+
+var _prosemirrorSchemaList = __webpack_require__(3);
+
+var _prosemirrorTables = __webpack_require__(2);
+
+var _prosemirrorFootnotes = __webpack_require__(6);
+
+var listNodes = {
+  ordered_list: _extends({}, _prosemirrorSchemaList.orderedList, {
+    content: 'list_item+',
+    group: 'block'
+  }),
+  bullet_list: _extends({}, _prosemirrorSchemaList.bulletList, {
+    content: 'list_item+',
+    group: 'block'
+  }),
+  list_item: _extends({}, _prosemirrorSchemaList.listItem, {
+    content: 'paragraph block*',
+    group: 'block'
+  })
+};
+
+exports.default = _extends({}, _prosemirrorSchemaBasic.nodes, listNodes, (0, _prosemirrorTables.tableNodes)({
+  tableGroup: 'block',
+  cellContent: 'block+'
+}), _prosemirrorFootnotes.footnoteNodes);
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _prosemirrorSchemaBasic = __webpack_require__(11);
+
+var subscript = {
+  excludes: 'superscript',
+  parseDOM: [{ tag: 'sub' }, { style: 'vertical-align=sub' }],
+  toDOM: function toDOM() {
+    return ['sub'];
+  }
+};
+
+var superscript = {
+  excludes: 'subscript',
+  parseDOM: [{ tag: 'sup' }, { style: 'vertical-align=super' }],
+  toDOM: function toDOM() {
+    return ['sup'];
+  }
+};
+
+var strikethrough = {
+  parseDOM: [{ tag: 'strike' }, { style: 'text-decoration:line-through' }, { style: 'text-decoration-line:line-through' }],
+  toDOM: function toDOM() {
+    return ['span', {
+      style: 'text-decoration-line:line-through'
+    }];
+  }
+};
+
+var underline = {
+  parseDOM: [{ tag: 'u' }, { style: 'text-decoration:underline' }],
+  toDOM: function toDOM() {
+    return ['span', {
+      style: 'text-decoration:underline'
+    }];
+  }
+};
+
+exports.default = _extends({}, _prosemirrorSchemaBasic.marks, {
+  subscript: subscript,
+  superscript: superscript,
+  strikethrough: strikethrough,
+  underline: underline
+});
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports) {
+
+module.exports = require("prosemirror-markdown");
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _menuItems = __webpack_require__(30);
+
+var _menuItems2 = _interopRequireDefault(_menuItems);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -865,18 +1413,13 @@ var MenuBuilder = function () {
   return MenuBuilder;
 }();
 
-var schemas = {
-  markdown: _prosemirrorMarkdown.schema,
-  html: _schema2.default
-};
-
-exports.default = function (docType) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return new MenuBuilder(docType, schemas[docType]).build(options);
+exports.default = function (docType, schema) {
+  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  return new MenuBuilder(docType, schema).build(options);
 };
 
 /***/ }),
-/* 15 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -886,19 +1429,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _marks = __webpack_require__(16);
+var _marks = __webpack_require__(31);
 
 var _marks2 = _interopRequireDefault(_marks);
 
-var _blocks = __webpack_require__(20);
+var _blocks = __webpack_require__(35);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
-var _inserts = __webpack_require__(21);
+var _inserts = __webpack_require__(36);
 
 var _inserts2 = _interopRequireDefault(_inserts);
 
-var _history = __webpack_require__(22);
+var _history = __webpack_require__(37);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -918,7 +1461,7 @@ exports.default = function (schemaType, schema) {
 };
 
 /***/ }),
-/* 16 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -928,9 +1471,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _prosemirrorCommands = __webpack_require__(1);
+var _prosemirrorCommands = __webpack_require__(4);
 
-var _helpers = __webpack_require__(2);
+var _helpers = __webpack_require__(5);
 
 var _icons = __webpack_require__(0);
 
@@ -1013,25 +1556,25 @@ var generic = function generic(schema) {
 exports.default = { generic: generic, htmlSpecific: htmlSpecific };
 
 /***/ }),
-/* 17 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = require("react");
 
 /***/ }),
-/* 18 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = require("@fortawesome/react-fontawesome");
 
 /***/ }),
-/* 19 */
+/* 34 */
 /***/ (function(module, exports) {
 
 module.exports = require("@fortawesome/fontawesome-free-solid");
 
 /***/ }),
-/* 20 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1041,11 +1584,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _prosemirrorCommands = __webpack_require__(1);
+var _prosemirrorCommands = __webpack_require__(4);
 
 var _prosemirrorSchemaList = __webpack_require__(3);
 
-var _helpers = __webpack_require__(2);
+var _helpers = __webpack_require__(5);
 
 var _icons = __webpack_require__(0);
 
@@ -1148,7 +1691,7 @@ var generic = function generic(schema) {
 exports.default = { generic: generic, htmlSpecific: htmlSpecific };
 
 /***/ }),
-/* 21 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1158,7 +1701,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _helpers = __webpack_require__(2);
+var _helpers = __webpack_require__(5);
 
 var _icons = __webpack_require__(0);
 
@@ -1237,7 +1780,7 @@ var generic = function generic(schema) {
 exports.default = { generic: generic, htmlSpecific: htmlSpecific };
 
 /***/ }),
-/* 22 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1247,7 +1790,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _prosemirrorHistory = __webpack_require__(4);
+var _prosemirrorHistory = __webpack_require__(1);
 
 var _icons = __webpack_require__(0);
 
@@ -1275,567 +1818,6 @@ var generic = function generic(schema) {
 };
 
 exports.default = { generic: generic, htmlSpecific: htmlSpecific };
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports) {
-
-module.exports = require("prosemirror-model");
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _prosemirrorSchemaBasic = __webpack_require__(7);
-
-var _prosemirrorSchemaList = __webpack_require__(3);
-
-var _prosemirrorTables = __webpack_require__(6);
-
-var _prosemirrorFootnotes = __webpack_require__(8);
-
-var listNodes = {
-  ordered_list: _extends({}, _prosemirrorSchemaList.orderedList, {
-    content: 'list_item+',
-    group: 'block'
-  }),
-  bullet_list: _extends({}, _prosemirrorSchemaList.bulletList, {
-    content: 'list_item+',
-    group: 'block'
-  }),
-  list_item: _extends({}, _prosemirrorSchemaList.listItem, {
-    content: 'paragraph block*',
-    group: 'block'
-  })
-};
-
-exports.default = _extends({}, _prosemirrorSchemaBasic.nodes, listNodes, (0, _prosemirrorTables.tableNodes)({
-  tableGroup: 'block',
-  cellContent: 'block+'
-}), _prosemirrorFootnotes.footnoteNodes);
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _prosemirrorSchemaBasic = __webpack_require__(7);
-
-var subscript = {
-  excludes: 'superscript',
-  parseDOM: [{ tag: 'sub' }, { style: 'vertical-align=sub' }],
-  toDOM: function toDOM() {
-    return ['sub'];
-  }
-};
-
-var superscript = {
-  excludes: 'subscript',
-  parseDOM: [{ tag: 'sup' }, { style: 'vertical-align=super' }],
-  toDOM: function toDOM() {
-    return ['sup'];
-  }
-};
-
-var strikethrough = {
-  parseDOM: [{ tag: 'strike' }, { style: 'text-decoration:line-through' }, { style: 'text-decoration-line:line-through' }],
-  toDOM: function toDOM() {
-    return ['span', {
-      style: 'text-decoration-line:line-through'
-    }];
-  }
-};
-
-var underline = {
-  parseDOM: [{ tag: 'u' }, { style: 'text-decoration:underline' }],
-  toDOM: function toDOM() {
-    return ['span', {
-      style: 'text-decoration:underline'
-    }];
-  }
-};
-
-exports.default = _extends({}, _prosemirrorSchemaBasic.marks, {
-  subscript: subscript,
-  superscript: superscript,
-  strikethrough: strikethrough,
-  underline: underline
-});
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _prosemirrorHistory = __webpack_require__(4);
-
-var _prosemirrorDropcursor = __webpack_require__(27);
-
-var _prosemirrorGapcursor = __webpack_require__(28);
-
-var _prosemirrorTables = __webpack_require__(6);
-
-var _prosemirrorPlaceholder = __webpack_require__(29);
-
-var _prosemirrorFootnotes = __webpack_require__(8);
-
-__webpack_require__(30);
-
-__webpack_require__(33);
-
-var _keys = __webpack_require__(35);
-
-var _keys2 = _interopRequireDefault(_keys);
-
-var _rules = __webpack_require__(37);
-
-var _rules2 = _interopRequireDefault(_rules);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var PluginBuilder = function () {
-  function PluginBuilder(schemaType, schema) {
-    _classCallCheck(this, PluginBuilder);
-
-    this.schemaType = schemaType;
-    this.schema = schema;
-  }
-
-  _createClass(PluginBuilder, [{
-    key: 'build',
-    value: function build() {
-      var plugins = [(0, _keys2.default)(this.schema), (0, _prosemirrorHistory.history)(), (0, _prosemirrorPlaceholder.placeholder)({ content: 'Start typing…' }), (0, _prosemirrorDropcursor.dropCursor)(), (0, _prosemirrorGapcursor.gapCursor)()];
-
-      if (this.schemaType === 'html') {
-        plugins.concat([_rules2.default, (0, _prosemirrorFootnotes.footnotes)(), (0, _prosemirrorTables.columnResizing)(), (0, _prosemirrorTables.tableEditing)()]);
-
-        // for tables
-        document.execCommand('enableObjectResizing', false, false);
-        document.execCommand('enableInlineTableEditing', false, false);
-      }
-
-      return plugins;
-    }
-  }]);
-
-  return PluginBuilder;
-}();
-
-exports.default = function (schemaType, schema) {
-  return new PluginBuilder(schemaType, schema).build();
-};
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports) {
-
-module.exports = require("prosemirror-dropcursor");
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports) {
-
-module.exports = require("prosemirror-gapcursor");
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports) {
-
-module.exports = require("@aeaton/prosemirror-placeholder");
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(31);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(11)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {
-	module.hot.accept("!!../../css-loader/index.js!./tables.css", function() {
-		var newContent = require("!!../../css-loader/index.js!./tables.css");
-
-		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-
-		var locals = (function(a, b) {
-			var key, idx = 0;
-
-			for(key in a) {
-				if(!b || a[key] !== b[key]) return false;
-				idx++;
-			}
-
-			for(key in b) idx--;
-
-			return idx === 0;
-		}(content.locals, newContent.locals));
-
-		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
-
-		update(newContent);
-	});
-
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(10)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".ProseMirror .tableWrapper {\n  overflow-x: auto;\n}\n.ProseMirror table {\n  border-collapse: collapse;\n  table-layout: fixed;\n  width: 100%;\n  overflow: hidden;\n}\n.ProseMirror td, .ProseMirror th {\n  vertical-align: top;\n  box-sizing: border-box;\n  position: relative;\n}\n.ProseMirror .column-resize-handle {\n  position: absolute;\n  right: -2px; top: 0; bottom: 0;\n  width: 4px;\n  z-index: 20;\n  background-color: #adf;\n  pointer-events: none;\n}\n.ProseMirror.resize-cursor {\n  cursor: ew-resize;\n  cursor: col-resize;\n}\n/* Give selected cells a blue overlay */\n.ProseMirror .selectedCell:after {\n  z-index: 2;\n  position: absolute;\n  content: \"\";\n  left: 0; right: 0; top: 0; bottom: 0;\n  background: rgba(200, 200, 255, 0.4);\n  pointer-events: none;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-
-/**
- * When source maps are enabled, `style-loader` uses a link element with a data-uri to
- * embed the css on the page. This breaks all relative urls because now they are relative to a
- * bundle instead of the current page.
- *
- * One solution is to only use full urls, but that may be impossible.
- *
- * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
- *
- * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
- *
- */
-
-module.exports = function (css) {
-  // get current location
-  var location = typeof window !== "undefined" && window.location;
-
-  if (!location) {
-    throw new Error("fixUrls requires window.location");
-  }
-
-	// blank or null?
-	if (!css || typeof css !== "string") {
-	  return css;
-  }
-
-  var baseUrl = location.protocol + "//" + location.host;
-  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
-
-	// convert each url(...)
-	/*
-	This regular expression is just a way to recursively match brackets within
-	a string.
-
-	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
-	   (  = Start a capturing group
-	     (?:  = Start a non-capturing group
-	         [^)(]  = Match anything that isn't a parentheses
-	         |  = OR
-	         \(  = Match a start parentheses
-	             (?:  = Start another non-capturing groups
-	                 [^)(]+  = Match anything that isn't a parentheses
-	                 |  = OR
-	                 \(  = Match a start parentheses
-	                     [^)(]*  = Match anything that isn't a parentheses
-	                 \)  = Match a end parentheses
-	             )  = End Group
-              *\) = Match anything and then a close parens
-          )  = Close non-capturing group
-          *  = Match anything
-       )  = Close capturing group
-	 \)  = Match a close parens
-
-	 /gi  = Get all matches, not the first.  Be case insensitive.
-	 */
-	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
-		// strip quotes (if they exist)
-		var unquotedOrigUrl = origUrl
-			.trim()
-			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
-			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
-
-		// already a full url? no change
-		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(unquotedOrigUrl)) {
-		  return fullMatch;
-		}
-
-		// convert the url to a full url
-		var newUrl;
-
-		if (unquotedOrigUrl.indexOf("//") === 0) {
-		  	//TODO: should we add protocol?
-			newUrl = unquotedOrigUrl;
-		} else if (unquotedOrigUrl.indexOf("/") === 0) {
-			// path should be relative to the base url
-			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
-		} else {
-			// path should be relative to current directory
-			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
-		}
-
-		// send back the fixed url(...)
-		return "url(" + JSON.stringify(newUrl) + ")";
-	});
-
-	// send back the fixed css
-	return fixedCss;
-};
-
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(34);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(11)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {
-	module.hot.accept("!!../../css-loader/index.js!./gapcursor.css", function() {
-		var newContent = require("!!../../css-loader/index.js!./gapcursor.css");
-
-		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-
-		var locals = (function(a, b) {
-			var key, idx = 0;
-
-			for(key in a) {
-				if(!b || a[key] !== b[key]) return false;
-				idx++;
-			}
-
-			for(key in b) idx--;
-
-			return idx === 0;
-		}(content.locals, newContent.locals));
-
-		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
-
-		update(newContent);
-	});
-
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(10)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".ProseMirror-gapcursor {\n  display: none;\n  pointer-events: none;\n  position: absolute;\n}\n\n.ProseMirror-gapcursor:after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: -2px;\n  width: 20px;\n  border-top: 1px solid black;\n  animation: ProseMirror-cursor-blink 1.1s steps(2, start) infinite;\n}\n\n@keyframes ProseMirror-cursor-blink {\n  to {\n    visibility: hidden;\n  }\n}\n\n.ProseMirror-focused .ProseMirror-gapcursor {\n  display: block;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _prosemirrorKeymap = __webpack_require__(36);
-
-var _prosemirrorInputrules = __webpack_require__(12);
-
-var _prosemirrorHistory = __webpack_require__(4);
-
-var _prosemirrorSchemaList = __webpack_require__(3);
-
-var _prosemirrorTables = __webpack_require__(6);
-
-var _prosemirrorCommands = __webpack_require__(1);
-
-var insertBreak = function insertBreak(schema) {
-  return function (state, dispatch) {
-    var br = schema.nodes.hard_break.create();
-    dispatch(state.tr.replaceSelectionWith(br).scrollIntoView());
-    return true;
-  };
-};
-
-var insertRule = function insertRule(schema) {
-  return function (state, dispatch) {
-    var hr = schema.nodes.horizontal_rule.create();
-    dispatch(state.tr.replaceSelectionWith(hr).scrollIntoView());
-    return true;
-  };
-};
-
-var keys = function keys(schema) {
-  return {
-    'Mod-z': _prosemirrorHistory.undo,
-    'Shift-Mod-z': _prosemirrorHistory.redo,
-    'Backspace': (0, _prosemirrorCommands.chainCommands)(_prosemirrorInputrules.undoInputRule, _prosemirrorCommands.deleteSelection),
-    'Mod-y': _prosemirrorHistory.redo,
-    'Alt-ArrowUp': _prosemirrorCommands.joinUp,
-    'Alt-ArrowDown': _prosemirrorCommands.joinDown,
-    'Mod-BracketLeft': _prosemirrorCommands.lift,
-    'Escape': _prosemirrorCommands.selectParentNode,
-    'Mod-b': (0, _prosemirrorCommands.toggleMark)(schema.marks.strong),
-    'Mod-i': (0, _prosemirrorCommands.toggleMark)(schema.marks.em),
-    'Mod-u': (0, _prosemirrorCommands.toggleMark)(schema.marks.underline),
-    'Mod-`': (0, _prosemirrorCommands.toggleMark)(schema.marks.code),
-    'Shift-Ctrl-8': (0, _prosemirrorSchemaList.wrapInList)(schema.nodes.bullet_list),
-    'Shift-Ctrl-9': (0, _prosemirrorSchemaList.wrapInList)(schema.nodes.ordered_list),
-    'Ctrl->': (0, _prosemirrorCommands.wrapIn)(schema.nodes.blockquote),
-    'Mod-Enter': (0, _prosemirrorCommands.chainCommands)(_prosemirrorCommands.exitCode, insertBreak(schema)),
-    'Shift-Enter': (0, _prosemirrorCommands.chainCommands)(_prosemirrorCommands.exitCode, insertBreak(schema)),
-    'Ctrl-Enter': (0, _prosemirrorCommands.chainCommands)(_prosemirrorCommands.exitCode, insertBreak(schema)), // mac-only?
-    'Enter': (0, _prosemirrorSchemaList.splitListItem)(schema.nodes.list_item),
-    'Mod-[': (0, _prosemirrorSchemaList.liftListItem)(schema.nodes.list_item),
-    'Mod-]': (0, _prosemirrorSchemaList.sinkListItem)(schema.nodes.list_item),
-    'Shift-Ctrl-0': (0, _prosemirrorCommands.setBlockType)(schema.nodes.paragraph),
-    'Shift-Ctrl-\\': (0, _prosemirrorCommands.setBlockType)(schema.nodes.code_block),
-    'Shift-Ctrl-1': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 1 }),
-    'Shift-Ctrl-2': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 2 }),
-    'Shift-Ctrl-3': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 3 }),
-    'Shift-Ctrl-4': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 4 }),
-    'Shift-Ctrl-5': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 5 }),
-    'Shift-Ctrl-6': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 6 }),
-    'Mod-_': insertRule(schema),
-    'Tab': (0, _prosemirrorTables.goToNextCell)(1),
-    'Shift-Tab': (0, _prosemirrorTables.goToNextCell)(-1)
-  };
-};
-
-var joinCustomWithBase = function joinCustomWithBase(customKeys) {
-  Object.keys(_prosemirrorCommands.baseKeymap).forEach(function (key) {
-    if (customKeys[key]) {
-      customKeys[key] = (0, _prosemirrorCommands.chainCommands)(customKeys[key], _prosemirrorCommands.baseKeymap[key]);
-    } else {
-      customKeys[key] = _prosemirrorCommands.baseKeymap[key];
-    }
-  });
-
-  return customKeys;
-};
-
-exports.default = function (schema) {
-  return (0, _prosemirrorKeymap.keymap)(joinCustomWithBase(keys(schema)));
-};
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports) {
-
-module.exports = require("prosemirror-keymap");
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _prosemirrorInputrules = __webpack_require__(12);
-
-var _schema = __webpack_require__(5);
-
-var _schema2 = _interopRequireDefault(_schema);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-exports.default = (0, _prosemirrorInputrules.inputRules)({
-  rules: [].concat(_toConsumableArray(_prosemirrorInputrules.smartQuotes), [_prosemirrorInputrules.ellipsis, _prosemirrorInputrules.emDash,
-
-  // > blockquote
-  (0, _prosemirrorInputrules.wrappingInputRule)(/^\s*>\s$/, _schema2.default.nodes.blockquote),
-
-  // 1. ordered list
-  (0, _prosemirrorInputrules.wrappingInputRule)(/^(\d+)\.\s$/, _schema2.default.nodes.ordered_list, function (match) {
-    return { order: +match[1] };
-  }, function (match, node) {
-    return node.childCount + node.attrs.order === +match[1];
-  }),
-
-  // * bullet list
-  (0, _prosemirrorInputrules.wrappingInputRule)(/^\s*([-+*])\s$/, _schema2.default.nodes.bullet_list),
-
-  // ``` code block
-  (0, _prosemirrorInputrules.textblockTypeInputRule)(/^```$/, _schema2.default.nodes.code_block),
-
-  // # heading
-  (0, _prosemirrorInputrules.textblockTypeInputRule)(new RegExp('^(#{1,6})\\s$'), _schema2.default.nodes.heading, function (match) {
-    return { level: match[1].length };
-  })])
-});
 
 /***/ })
 /******/ ]);
