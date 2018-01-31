@@ -828,7 +828,7 @@ var PluginBuilder = function () {
   _createClass(PluginBuilder, [{
     key: 'build',
     value: function build() {
-      var plugins = [(0, _keys2.default)(this.schema), (0, _prosemirrorHistory.history)(), (0, _prosemirrorPlaceholder.placeholder)({ content: 'Start typing…' }), (0, _prosemirrorDropcursor.dropCursor)(), (0, _prosemirrorGapcursor.gapCursor)()];
+      var plugins = [(0, _keys2.default)(this.docType, this.schema), (0, _prosemirrorHistory.history)(), (0, _prosemirrorPlaceholder.placeholder)({ content: 'Start typing…' }), (0, _prosemirrorDropcursor.dropCursor)(), (0, _prosemirrorGapcursor.gapCursor)()];
 
       if (this.docType === 'html') {
         plugins.concat([_rules2.default, (0, _prosemirrorFootnotes.footnotes)(), (0, _prosemirrorTables.columnResizing)(), (0, _prosemirrorTables.tableEditing)()]);
@@ -1101,6 +1101,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _prosemirrorKeymap = __webpack_require__(23);
 
 var _prosemirrorInputrules = __webpack_require__(9);
@@ -1129,11 +1131,22 @@ var insertRule = function insertRule(schema) {
   };
 };
 
-var keys = function keys(schema) {
+var htmlSpecificKeys = function htmlSpecificKeys(schema) {
   return {
+    'Mod-Enter': (0, _prosemirrorCommands.chainCommands)(_prosemirrorCommands.exitCode, insertBreak(schema)),
+    'Shift-Enter': (0, _prosemirrorCommands.chainCommands)(_prosemirrorCommands.exitCode, insertBreak(schema)),
+    'Ctrl-Enter': (0, _prosemirrorCommands.chainCommands)(_prosemirrorCommands.exitCode, insertBreak(schema)), // mac-only?
+    'Tab': (0, _prosemirrorTables.goToNextCell)(1),
+    'Shift-Tab': (0, _prosemirrorTables.goToNextCell)(-1),
+    'Mod-u': (0, _prosemirrorCommands.toggleMark)(schema.marks.underline)
+  };
+};
+
+var keys = function keys(docType, schema) {
+  return _extends({
     'Mod-z': _prosemirrorHistory.undo,
     'Shift-Mod-z': _prosemirrorHistory.redo,
-    'Backspace': (0, _prosemirrorCommands.chainCommands)(_prosemirrorInputrules.undoInputRule, _prosemirrorCommands.deleteSelection),
+    'Backspace': _prosemirrorInputrules.undoInputRule,
     'Mod-y': _prosemirrorHistory.redo,
     'Alt-ArrowUp': _prosemirrorCommands.joinUp,
     'Alt-ArrowDown': _prosemirrorCommands.joinDown,
@@ -1141,14 +1154,10 @@ var keys = function keys(schema) {
     'Escape': _prosemirrorCommands.selectParentNode,
     'Mod-b': (0, _prosemirrorCommands.toggleMark)(schema.marks.strong),
     'Mod-i': (0, _prosemirrorCommands.toggleMark)(schema.marks.em),
-    'Mod-u': (0, _prosemirrorCommands.toggleMark)(schema.marks.underline),
     'Mod-`': (0, _prosemirrorCommands.toggleMark)(schema.marks.code),
     'Shift-Ctrl-8': (0, _prosemirrorSchemaList.wrapInList)(schema.nodes.bullet_list),
     'Shift-Ctrl-9': (0, _prosemirrorSchemaList.wrapInList)(schema.nodes.ordered_list),
     'Ctrl->': (0, _prosemirrorCommands.wrapIn)(schema.nodes.blockquote),
-    'Mod-Enter': (0, _prosemirrorCommands.chainCommands)(_prosemirrorCommands.exitCode, insertBreak(schema)),
-    'Shift-Enter': (0, _prosemirrorCommands.chainCommands)(_prosemirrorCommands.exitCode, insertBreak(schema)),
-    'Ctrl-Enter': (0, _prosemirrorCommands.chainCommands)(_prosemirrorCommands.exitCode, insertBreak(schema)), // mac-only?
     'Enter': (0, _prosemirrorSchemaList.splitListItem)(schema.nodes.list_item),
     'Mod-[': (0, _prosemirrorSchemaList.liftListItem)(schema.nodes.list_item),
     'Mod-]': (0, _prosemirrorSchemaList.sinkListItem)(schema.nodes.list_item),
@@ -1160,10 +1169,8 @@ var keys = function keys(schema) {
     'Shift-Ctrl-4': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 4 }),
     'Shift-Ctrl-5': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 5 }),
     'Shift-Ctrl-6': (0, _prosemirrorCommands.setBlockType)(schema.nodes.heading, { level: 6 }),
-    'Mod-_': insertRule(schema),
-    'Tab': (0, _prosemirrorTables.goToNextCell)(1),
-    'Shift-Tab': (0, _prosemirrorTables.goToNextCell)(-1)
-  };
+    'Mod-_': insertRule(schema)
+  }, docType === 'html' ? htmlSpecificKeys(schema) : {});
 };
 
 var joinCustomWithBase = function joinCustomWithBase(customKeys) {
@@ -1178,8 +1185,8 @@ var joinCustomWithBase = function joinCustomWithBase(customKeys) {
   return customKeys;
 };
 
-exports.default = function (schema) {
-  return (0, _prosemirrorKeymap.keymap)(joinCustomWithBase(keys(schema)));
+exports.default = function (docType, schema) {
+  return (0, _prosemirrorKeymap.keymap)(joinCustomWithBase(keys(docType, schema)));
 };
 
 /***/ }),
@@ -1611,18 +1618,7 @@ var _icons2 = _interopRequireDefault(_icons);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var htmlSpecific = function htmlSpecific(schema) {
-  return {
-    plain: {
-      title: 'Change to paragraph',
-      content: _icons2.default.paragraph,
-      active: (0, _helpers.blockActive)(schema.nodes.paragraph),
-      enable: (0, _prosemirrorCommands.setBlockType)(schema.nodes.paragraph),
-      run: (0, _prosemirrorCommands.setBlockType)(schema.nodes.paragraph)
-    }
-  };
-};
-
+var htmlSpecific = function htmlSpecific(schema) {};
 var generic = function generic(schema) {
   return {
     plain: {
