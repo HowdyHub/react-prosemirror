@@ -11,20 +11,36 @@ import 'prosemirror-gapcursor/style/gapcursor.css'
 import keys from './keys'
 import rules from './rules'
 
-export default [
-  rules,
-  keys,
-  placeholder({
-    content: 'Start typing…'
-  }),
-  footnotes(),
-  dropCursor(),
-  gapCursor(),
-  history(),
-  columnResizing(),
-  tableEditing()
-]
+class PluginBuilder {
+  constructor(docType, schema) {
+    this.docType = docType;
+    this.schema = schema;
+  }
 
-// for tables
-document.execCommand('enableObjectResizing', false, false)
-document.execCommand('enableInlineTableEditing', false, false)
+  build() {
+    let plugins = [
+      keys(this.docType, this.schema),
+      history(),
+      placeholder({ content: 'Start typing…'}),
+      dropCursor(),
+      gapCursor()
+    ]
+
+    if(this.docType === 'html') {
+      plugins.concat([
+        rules,
+        footnotes(),
+        columnResizing(),
+        tableEditing()
+      ])
+
+      // for tables
+      document.execCommand('enableObjectResizing', false, false)
+      document.execCommand('enableInlineTableEditing', false, false)
+    }
+
+    return plugins
+  }
+}
+
+export default (docType, schema) => new PluginBuilder(docType, schema).build();

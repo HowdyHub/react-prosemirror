@@ -19,16 +19,20 @@
     "@fortawesome/fontawesome": "^1.1.2",
     "@fortawesome/fontawesome-free-solid": "^5.0.4",
     "@fortawesome/react-fontawesome": "^0.0.17",
+    "prop-types": "^15.6.0",
     "prosemirror-commands": "^1.0.0",
     "prosemirror-dropcursor": "^1.0.0",
     "prosemirror-gapcursor": "^1.0.0",
     "prosemirror-history": "^1.0.0",
     "prosemirror-inputrules": "^1.0.1",
     "prosemirror-keymap": "^1.0.0",
+    "prosemirror-markdown": "^1.0.3",
     "prosemirror-model": "^1.0.0",
     "prosemirror-schema-basic": "^1.0.0",
     "prosemirror-schema-list": "^1.0.0",
-    "prosemirror-tables": "^0.6.1"
+    "prosemirror-tables": "^0.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

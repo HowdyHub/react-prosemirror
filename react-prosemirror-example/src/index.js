@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import { Editor, MenuBar } from '@aeaton/react-prosemirror'
-import { options, menu } from '@aeaton/react-prosemirror-config-default'
+import { options, menu } from 'prosemirror-howdy-wip/react-prosemirror-config-default'
 
 const Container = styled('div')`
   position: absolute;
@@ -31,14 +31,14 @@ ReactDOM.render(
   <Container>
     <Input>
       <Editor
-        options={options}
+        options={options()}
         value={`<h1>This is a title</h1><p>This is a paragraph</p>`}
         onChange={value => {
           document.getElementById('output').textContent = JSON.stringify(value, null, 2)
         }}
         render={({ editor, state, dispatch }) => (
           <React.Fragment>
-            <MenuBar menu={menu} state={state} dispatch={dispatch} />
+            <MenuBar menu={menu()} state={state} dispatch={dispatch} />
             {editor}
           </React.Fragment>
         )}

@@ -1,11 +1,28 @@
 // An example setup, adapted from prosemirror-example-setup
 
-import schema from './schema'
 import plugins from './plugins'
+import htmlSchema from './schema'
+import { schema as markdownSchema, defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown'
 
-export const options = {
-  plugins,
-  schema
+const schemas = {
+  markdown: markdownSchema,
+  html:     htmlSchema
 }
 
-export { default as menu } from './menu'
+export const options = ({ docType = 'html', customSchema = null } = {}) => {
+  const schema = customSchema || schemas[docType]
+
+  return {
+    plugins: plugins(docType, schema),
+    schema
+  }
+}
+
+import menuBuilder from './menu';
+export const menu = ({ docType = 'html', options = {}, customSchema = null } = {}) => {
+  const schema = customSchema || schemas[docType]
+
+  return menuBuilder(docType, schema, options)
+}
+
+export { defaultMarkdownParser, defaultMarkdownSerializer }

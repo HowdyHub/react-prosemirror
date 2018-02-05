@@ -10,7 +10,7 @@
   ],
   "dependencies": {
     "@aeaton/react-prosemirror": "^0.10.1",
-    "@aeaton/react-prosemirror-config-default": "^0.8.8",
+    "prosemirror-howdy-wip": "https://github.com/HowdyHub/react-prosemirror/tarball/github-version/react-prosemirror-config-default",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "^1.1.0",
