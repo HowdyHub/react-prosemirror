@@ -1773,26 +1773,28 @@ var htmlSpecific = function htmlSpecific(schema) {
 };
 
 var generic = function generic(schema) {
+  var addImage = function addImage(dispatch, state, src) {
+    var img = schema.nodes.image.createAndFill({ src: src });
+    dispatch(state.tr.replaceSelectionWith(img));
+  };
+
   return {
     image: {
       title: 'Insert image',
       content: _icons2.default.image,
       enable: (0, _helpers.canInsert)(schema.nodes.image),
       run: function run(state, dispatch, refs) {
-        var src = void 0;
-
         if (refs.imagePrompt) {
-          refs.imagePrompt.show(function (imageSrc) {
-            src = imageSrc;
+          refs.imagePrompt.show(function (src) {
+            addImage(dispatch, state, src);
           });
         } else {
-          src = (0, _helpers.promptForImage)();
+          var src = (0, _helpers.promptForImage)();
+
+          if (!src) return false;
+
+          addImage(dispatch, state, src);
         }
-
-        if (!src) return false;
-
-        var img = schema.nodes.image.createAndFill({ src: src });
-        dispatch(state.tr.replaceSelectionWith(img));
       }
     }
     // hr: {
