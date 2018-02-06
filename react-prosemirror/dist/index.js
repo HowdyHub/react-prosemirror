@@ -181,14 +181,26 @@ var isOldIE = memoize(function () {
 	return window && document && document.all && !window.atob;
 });
 
+var getTarget = function (target) {
+  return document.querySelector(target);
+};
+
 var getElement = (function (fn) {
 	var memo = {};
 
-	return function(selector) {
-		if (typeof memo[selector] === "undefined") {
-			var styleTarget = fn.call(this, selector);
+	return function(target) {
+                // If passing function in options, then use it for resolve "head" element.
+                // Useful for Shadow Root style i.e
+                // {
+                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
+                // }
+                if (typeof target === 'function') {
+                        return target();
+                }
+                if (typeof memo[target] === "undefined") {
+			var styleTarget = getTarget.call(this, target);
 			// Special case to return head of iframe instead of iframe itself
-			if (styleTarget instanceof window.HTMLIFrameElement) {
+			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
 				try {
 					// This will throw an exception if access to iframe is blocked
 					// due to cross-origin restrictions
@@ -197,13 +209,11 @@ var getElement = (function (fn) {
 					styleTarget = null;
 				}
 			}
-			memo[selector] = styleTarget;
+			memo[target] = styleTarget;
 		}
-		return memo[selector]
+		return memo[target]
 	};
-})(function (target) {
-	return document.querySelector(target)
-});
+})();
 
 var singleton = null;
 var	singletonCounter = 0;
@@ -225,7 +235,7 @@ module.exports = function(list, options) {
 	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
 
 	// By default, add <style> tags to the <head> element
-	if (!options.insertInto) options.insertInto = "head";
+        if (!options.insertInto) options.insertInto = "head";
 
 	// By default, add <style> tags to the bottom of the target
 	if (!options.insertAt) options.insertAt = "bottom";
@@ -668,30 +678,49 @@ module.exports = require("prosemirror-view");
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
 
-// load the styles
 var content = __webpack_require__(8);
+
 if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
+
 var transform;
+var insertInto;
+
+
 
 var options = {"hmr":true}
+
 options.transform = transform
-// add the styles to the DOM
+options.insertInto = undefined;
+
 var update = __webpack_require__(2)(content, options);
+
 if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
+
 if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../css-loader/index.js!./prosemirror.css", function() {
-			var newContent = require("!!../../css-loader/index.js!./prosemirror.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
+	module.hot.accept("!!../../css-loader/index.js!./prosemirror.css", function() {
+		var newContent = require("!!../../css-loader/index.js!./prosemirror.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
 	module.hot.dispose(function() { update(); });
 }
 
@@ -808,30 +837,49 @@ module.exports = function (css) {
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
 
-// load the styles
 var content = __webpack_require__(11);
+
 if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
+
 var transform;
+var insertInto;
+
+
 
 var options = {"hmr":true}
+
 options.transform = transform
-// add the styles to the DOM
+options.insertInto = undefined;
+
 var update = __webpack_require__(2)(content, options);
+
 if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
+
 if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js!./Editor.css", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js!./Editor.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
+	module.hot.accept("!!../node_modules/css-loader/index.js!./Editor.css", function() {
+		var newContent = require("!!../node_modules/css-loader/index.js!./Editor.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
 	module.hot.dispose(function() { update(); });
 }
 
@@ -980,6 +1028,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -997,6 +1047,12 @@ var _MenuBarModule = __webpack_require__(18);
 var _MenuBarModule2 = _interopRequireDefault(_MenuBarModule);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -1022,28 +1078,51 @@ var Button = function Button(state, dispatch) {
   };
 };
 
-var MenuBar = function MenuBar(_ref) {
-  var menu = _ref.menu,
-      children = _ref.children,
-      state = _ref.state,
-      dispatch = _ref.dispatch;
-  return _react2.default.createElement(
-    'div',
-    { className: _MenuBarModule2.default.bar },
-    children && _react2.default.createElement(
-      'span',
-      { className: _MenuBarModule2.default.group },
-      children
-    ),
-    (0, _map2.default)(menu, function (item, key) {
+var MenuBar = function (_React$Component) {
+  _inherits(MenuBar, _React$Component);
+
+  function MenuBar() {
+    _classCallCheck(this, MenuBar);
+
+    return _possibleConstructorReturn(this, (MenuBar.__proto__ || Object.getPrototypeOf(MenuBar)).apply(this, arguments));
+  }
+
+  _createClass(MenuBar, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          menu = _props.menu,
+          children = _props.children,
+          state = _props.state,
+          dispatch = _props.dispatch;
+
+
       return _react2.default.createElement(
-        'span',
-        { key: key, className: _MenuBarModule2.default.group },
-        (0, _map2.default)(item, Button(state, dispatch))
+        'div',
+        { className: _MenuBarModule2.default.bar },
+        children && _react2.default.createElement(
+          'span',
+          { className: _MenuBarModule2.default.group },
+          children
+        ),
+        (0, _map2.default)(menu, function (item, key) {
+          return _react2.default.createElement(
+            'span',
+            { key: key, className: _MenuBarModule2.default.group },
+            (0, _map2.default)(item, Button(state, dispatch))
+          );
+        }),
+        _react2.default.createElement(
+          'div',
+          { ref: 'imagePrompt' },
+          'Test'
+        )
       );
-    })
-  );
-};
+    }
+  }]);
+
+  return MenuBar;
+}(_react2.default.Component);
 
 exports.default = MenuBar;
 
@@ -1063,30 +1142,49 @@ module.exports = require("classnames");
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
 
-// load the styles
 var content = __webpack_require__(19);
+
 if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
+
 var transform;
+var insertInto;
+
+
 
 var options = {"hmr":true}
+
 options.transform = transform
-// add the styles to the DOM
+options.insertInto = undefined;
+
 var update = __webpack_require__(2)(content, options);
+
 if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
+
 if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js??ref--0-oneOf-1-1!./MenuBar.module.css", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js??ref--0-oneOf-1-1!./MenuBar.module.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
+	module.hot.accept("!!../node_modules/css-loader/index.js??ref--0-oneOf-1-1!./MenuBar.module.css", function() {
+		var newContent = require("!!../node_modules/css-loader/index.js??ref--0-oneOf-1-1!./MenuBar.module.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
 	module.hot.dispose(function() { update(); });
 }
 
