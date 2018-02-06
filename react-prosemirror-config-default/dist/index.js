@@ -204,6 +204,16 @@ var promptForURL = exports.promptForURL = function promptForURL() {
   return url;
 };
 
+var promptForImage = exports.promptForImage = function promptForImage() {
+  var url = window && window.prompt('Enter the URL', 'https://');
+
+  if (url && !/^https?:\/\//i.test(url)) {
+    url = 'https://' + url;
+  }
+
+  return url;
+};
+
 /***/ }),
 /* 6 */
 /***/ (function(module, exports) {
@@ -1768,8 +1778,16 @@ var generic = function generic(schema) {
       title: 'Insert image',
       content: _icons2.default.image,
       enable: (0, _helpers.canInsert)(schema.nodes.image),
-      run: function run(state, dispatch) {
-        var src = (0, _helpers.promptForURL)();
+      run: function run(state, dispatch, refs) {
+        var src = void 0;
+
+        if (refs.imagePrompt) {
+          refs.imagePrompt.show();
+          src = refs.imagePrompt.grabImageSrc();
+        } else {
+          src = (0, _helpers.promptForImage)();
+        }
+
         if (!src) return false;
 
         var img = schema.nodes.image.createAndFill({ src: src });

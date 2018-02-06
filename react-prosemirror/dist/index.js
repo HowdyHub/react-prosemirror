@@ -1075,11 +1075,7 @@ var Button = function Button(state, dispatch, refs) {
         onMouseDown: function onMouseDown(e) {
           e.preventDefault();
 
-          if (item.title === 'Insert image') {
-            refs.imagePrompt.show();
-          }
-
-          item.run(state, dispatch);
+          item.run(state, dispatch, refs);
         }
       },
       item.content
@@ -1105,8 +1101,11 @@ var MenuBar = function (_React$Component) {
           menu = _props.menu,
           children = _props.children,
           state = _props.state,
-          dispatch = _props.dispatch;
+          dispatch = _props.dispatch,
+          imagePrompt = _props.imagePrompt;
 
+
+      var ImagePrompt = imagePrompt || _Prompt2.default;
 
       return _react2.default.createElement(
         'div',
@@ -1123,7 +1122,7 @@ var MenuBar = function (_React$Component) {
             (0, _map2.default)(item, Button(state, dispatch, _this2.refs))
           );
         }),
-        _react2.default.createElement(_Prompt2.default, { ref: 'imagePrompt' })
+        _react2.default.createElement(ImagePrompt, { ref: 'imagePrompt' })
       );
     }
   }]);
@@ -1262,6 +1261,11 @@ var Prompt = function (_React$Component) {
     key: "hide",
     value: function hide() {
       this.setState({ show: false });
+    }
+  }, {
+    key: "grabImageSrc",
+    value: function grabImageSrc() {
+      return null;
     }
   }, {
     key: "render",
