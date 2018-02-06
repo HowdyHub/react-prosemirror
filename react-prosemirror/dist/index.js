@@ -1040,9 +1040,9 @@ var _map = __webpack_require__(16);
 
 var _map2 = _interopRequireDefault(_map);
 
-var _classnames2 = __webpack_require__(17);
+var _classnames3 = __webpack_require__(17);
 
-var _classnames3 = _interopRequireDefault(_classnames2);
+var _classnames4 = _interopRequireDefault(_classnames3);
 
 var _MenuBarModule = __webpack_require__(18);
 
@@ -1071,7 +1071,7 @@ var Button = function Button(state, dispatch, refs) {
       {
         key: key,
         type: 'button',
-        className: (0, _classnames3.default)((_classnames = {}, _defineProperty(_classnames, _MenuBarModule2.default.button, true), _defineProperty(_classnames, _MenuBarModule2.default.active, item.active && item.active(state)), _classnames)),
+        className: (0, _classnames4.default)((_classnames = {}, _defineProperty(_classnames, _MenuBarModule2.default.button, true), _defineProperty(_classnames, _MenuBarModule2.default.active, item.active && item.active(state)), _classnames)),
         title: item.title,
         disabled: item.enable && !item.enable(state),
         onMouseDown: function onMouseDown(e) {
@@ -1125,7 +1125,7 @@ var MenuBar = function (_React$Component) {
             (0, _map2.default)(item, Button(state, dispatch, _this2.refs))
           );
         }),
-        _react2.default.createElement(ImagePrompt, _extends({ ref: 'imagePrompt' }, imagePromptProps))
+        _react2.default.createElement(ImagePrompt, _extends({ className: (0, _classnames4.default)(_defineProperty({}, _MenuBarModule2.default.prompt, true)), ref: 'imagePrompt' }, imagePromptProps))
       );
     }
   }]);
@@ -1206,14 +1206,15 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "._18REez13sPdqyVdjc8KyiG {\n  margin-bottom: 5px;\n  display: flex;\n  align-items: baseline;\n}\n\n._28CIjnZhTNlCiXzjH9_CoM {\n  margin-right: 5px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL {\n  background: #fff;\n  border: none;\n  font-size: inherit;\n  cursor: pointer;\n  color: #777;\n  border-radius: 0;\n  padding: 5px 10px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:hover {\n  color: #000;\n  background: #f6f6f6;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL._2WHfJ-FniXIbA-Y_-IM0Rc {\n  color: #000;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:disabled {\n  color: #ccc;\n}\n", ""]);
+exports.push([module.i, "._18REez13sPdqyVdjc8KyiG {\n  margin-bottom: 5px;\n  display: flex;\n  align-items: baseline;\n}\n\n._28CIjnZhTNlCiXzjH9_CoM {\n  margin-right: 5px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL {\n  background: #fff;\n  border: none;\n  font-size: inherit;\n  cursor: pointer;\n  color: #777;\n  border-radius: 0;\n  padding: 5px 10px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:hover {\n  color: #000;\n  background: #f6f6f6;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL._2WHfJ-FniXIbA-Y_-IM0Rc {\n  color: #000;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:disabled {\n  color: #ccc;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw {\n  position: absolute;\n  top: 10px; right: 10px; bottom: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n", ""]);
 
 // exports
 exports.locals = {
 	"bar": "_18REez13sPdqyVdjc8KyiG",
 	"group": "_28CIjnZhTNlCiXzjH9_CoM",
 	"button": "_1D-5A2zE6ulZzCSsQaxnbL",
-	"active": "_2WHfJ-FniXIbA-Y_-IM0Rc"
+	"active": "_2WHfJ-FniXIbA-Y_-IM0Rc",
+	"prompt": "_3Y18xWtmRC6mybk9g2iRZw"
 };
 
 /***/ }),
