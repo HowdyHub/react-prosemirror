@@ -1095,6 +1095,41 @@ var MenuBar = function (_React$Component) {
   }
 
   _createClass(MenuBar, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var childRefs = {},
+          children = this.props.children;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+
+        for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var child = _step.value;
+
+          if (child.ref) {
+            Object.assign(childRefs, _defineProperty({}, child.ref, child));
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      Object.assign(this.refs, childRefs);
+    }
+  }, {
     key: 'renderImagePrompt',
     value: function renderImagePrompt() {
       var imagePrompt = this.props.imagePrompt;
