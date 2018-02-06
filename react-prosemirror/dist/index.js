@@ -1028,6 +1028,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -1105,7 +1107,8 @@ var MenuBar = function (_React$Component) {
           imagePrompt = _props.imagePrompt;
 
 
-      var ImagePrompt = imagePrompt || _Prompt2.default;
+      var ImagePrompt = imagePrompt ? imagePrompt.component : _Prompt2.default,
+          imagePromptProps = imagePrompt ? imagePrompt.props : {};
 
       return _react2.default.createElement(
         'div',
@@ -1122,7 +1125,7 @@ var MenuBar = function (_React$Component) {
             (0, _map2.default)(item, Button(state, dispatch, _this2.refs))
           );
         }),
-        _react2.default.createElement(ImagePrompt, { ref: 'imagePrompt' })
+        _react2.default.createElement(ImagePrompt, _extends({ ref: 'imagePrompt' }, imagePromptProps))
       );
     }
   }]);
