@@ -1125,7 +1125,11 @@ var MenuBar = function (_React$Component) {
             (0, _map2.default)(item, Button(state, dispatch, _this2.refs))
           );
         }),
-        _react2.default.createElement(ImagePrompt, _extends({ className: _MenuBarModule2.default.prompt, ref: 'imagePrompt' }, imagePromptProps))
+        _react2.default.createElement(
+          'div',
+          { className: _MenuBarModule2.default.prompt },
+          _react2.default.createElement(ImagePrompt, _extends({ ref: 'imagePrompt' }, imagePromptProps))
+        )
       );
     }
   }]);
@@ -1206,7 +1210,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "._18REez13sPdqyVdjc8KyiG {\n  margin-bottom: 5px;\n  display: flex;\n  align-items: baseline;\n}\n\n._28CIjnZhTNlCiXzjH9_CoM {\n  margin-right: 5px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL {\n  background: #fff;\n  border: none;\n  font-size: inherit;\n  cursor: pointer;\n  color: #777;\n  border-radius: 0;\n  padding: 5px 10px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:hover {\n  color: #000;\n  background: #f6f6f6;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL._2WHfJ-FniXIbA-Y_-IM0Rc {\n  color: #000;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:disabled {\n  color: #ccc;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw {\n  position: absolute;\n  top: 10px; right: 10px; bottom: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n", ""]);
+exports.push([module.i, "._18REez13sPdqyVdjc8KyiG {\n  margin-bottom: 5px;\n  display: flex;\n  align-items: baseline;\n}\n\n._28CIjnZhTNlCiXzjH9_CoM {\n  margin-right: 5px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL {\n  background: #fff;\n  border: none;\n  font-size: inherit;\n  cursor: pointer;\n  color: #777;\n  border-radius: 0;\n  padding: 5px 10px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:hover {\n  color: #000;\n  background: #f6f6f6;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL._2WHfJ-FniXIbA-Y_-IM0Rc {\n  color: #000;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:disabled {\n  color: #ccc;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div {\n  position: absolute;\n  top: 10px; right: 10px; bottom: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n", ""]);
 
 // exports
 exports.locals = {
