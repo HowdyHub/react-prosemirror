@@ -1040,9 +1040,9 @@ var _map = __webpack_require__(16);
 
 var _map2 = _interopRequireDefault(_map);
 
-var _classnames3 = __webpack_require__(17);
+var _classnames2 = __webpack_require__(17);
 
-var _classnames4 = _interopRequireDefault(_classnames3);
+var _classnames3 = _interopRequireDefault(_classnames2);
 
 var _MenuBarModule = __webpack_require__(18);
 
@@ -1071,7 +1071,7 @@ var Button = function Button(state, dispatch, refs) {
       {
         key: key,
         type: 'button',
-        className: (0, _classnames4.default)((_classnames = {}, _defineProperty(_classnames, _MenuBarModule2.default.button, true), _defineProperty(_classnames, _MenuBarModule2.default.active, item.active && item.active(state)), _classnames)),
+        className: (0, _classnames3.default)((_classnames = {}, _defineProperty(_classnames, _MenuBarModule2.default.button, true), _defineProperty(_classnames, _MenuBarModule2.default.active, item.active && item.active(state)), _classnames)),
         title: item.title,
         disabled: item.enable && !item.enable(state),
         onMouseDown: function onMouseDown(e) {
@@ -1125,7 +1125,7 @@ var MenuBar = function (_React$Component) {
             (0, _map2.default)(item, Button(state, dispatch, _this2.refs))
           );
         }),
-        _react2.default.createElement(ImagePrompt, _extends({ className: (0, _classnames4.default)(_defineProperty({}, _MenuBarModule2.default.prompt, true)), ref: 'imagePrompt' }, imagePromptProps))
+        _react2.default.createElement(ImagePrompt, _extends({ className: _MenuBarModule2.default.prompt, ref: 'imagePrompt' }, imagePromptProps))
       );
     }
   }]);
