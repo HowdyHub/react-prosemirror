@@ -1095,6 +1095,24 @@ var MenuBar = function (_React$Component) {
   }
 
   _createClass(MenuBar, [{
+    key: 'renderImagePrompt',
+    value: function renderImagePrompt() {
+      var imagePrompt = this.props.imagePrompt;
+
+
+      if (!imagePrompt || !imagePrompt.component) {
+        return null;
+      }
+
+      var imagePromptProps = imagePrompt ? imagePrompt.props : {};
+
+      return _react2.default.createElement(
+        'div',
+        { className: _MenuBarModule2.default.prompt },
+        _react2.default.createElement('imagePrompt', _extends({ ref: 'imagePrompt' }, imagePromptProps))
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -1103,12 +1121,8 @@ var MenuBar = function (_React$Component) {
           menu = _props.menu,
           children = _props.children,
           state = _props.state,
-          dispatch = _props.dispatch,
-          imagePrompt = _props.imagePrompt;
+          dispatch = _props.dispatch;
 
-
-      var ImagePrompt = imagePrompt ? imagePrompt.component : _Prompt2.default,
-          imagePromptProps = imagePrompt ? imagePrompt.props : {};
 
       return _react2.default.createElement(
         'div',
@@ -1125,11 +1139,7 @@ var MenuBar = function (_React$Component) {
             (0, _map2.default)(item, Button(state, dispatch, _this2.refs))
           );
         }),
-        _react2.default.createElement(
-          'div',
-          { className: _MenuBarModule2.default.prompt },
-          _react2.default.createElement(ImagePrompt, _extends({ ref: 'imagePrompt' }, imagePromptProps))
-        )
+        this.renderImagePrompt()
       );
     }
   }]);
