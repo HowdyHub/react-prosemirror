@@ -1095,57 +1095,15 @@ var MenuBar = function (_React$Component) {
   }
 
   _createClass(MenuBar, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var childRefs = {},
-          children = this.props.children;
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-
-        for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var child = _step.value;
-
-          if (child.ref) {
-            Object.assign(childRefs, _defineProperty({}, child.ref, child));
-          }
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
-      Object.assign(this.refs, childRefs);
-    }
-  }, {
-    key: 'renderImagePrompt',
-    value: function renderImagePrompt() {
-      var imagePrompt = this.props.imagePrompt;
-
-
-      if (!imagePrompt || !imagePrompt.component) {
-        return null;
-      }
-
-      var imagePromptProps = imagePrompt ? imagePrompt.props : {},
-          ImagePrompt = imagePrompt.component;
+    key: 'renderPrompt',
+    value: function renderPrompt(prompt, key) {
+      var promptProps = prompt.props || {},
+          PromptComponent = prompt.component || _Prompt2.default;
 
       return _react2.default.createElement(
         'div',
-        { className: _MenuBarModule2.default.prompt },
-        _react2.default.createElement(ImagePrompt, _extends({ ref: 'imagePrompt' }, imagePromptProps))
+        { key: key, className: _MenuBarModule2.default.prompt },
+        _react2.default.createElement(PromptComponent, _extends({ ref: prompt.reference }, promptProps))
       );
     }
   }, {
@@ -1157,7 +1115,8 @@ var MenuBar = function (_React$Component) {
           menu = _props.menu,
           children = _props.children,
           state = _props.state,
-          dispatch = _props.dispatch;
+          dispatch = _props.dispatch,
+          prompts = _props.prompts;
 
 
       return _react2.default.createElement(
@@ -1175,7 +1134,7 @@ var MenuBar = function (_React$Component) {
             (0, _map2.default)(item, Button(state, dispatch, _this2.refs))
           );
         }),
-        this.renderImagePrompt()
+        prompts.map(this.renderPrompt)
       );
     }
   }]);
@@ -1256,7 +1215,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "._18REez13sPdqyVdjc8KyiG {\n  margin-bottom: 5px;\n  display: flex;\n  align-items: baseline;\n}\n\n._28CIjnZhTNlCiXzjH9_CoM {\n  margin-right: 5px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL {\n  background: #fff;\n  border: none;\n  font-size: inherit;\n  cursor: pointer;\n  color: #777;\n  border-radius: 0;\n  padding: 5px 10px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:hover {\n  color: #000;\n  background: #f6f6f6;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL._2WHfJ-FniXIbA-Y_-IM0Rc {\n  color: #000;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:disabled {\n  color: #ccc;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div {\n  position: absolute;\n  top: 10px; right: 10px; bottom: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n", ""]);
+exports.push([module.i, "._18REez13sPdqyVdjc8KyiG {\n  margin-bottom: 5px;\n  display: flex;\n  align-items: baseline;\n}\n\n._28CIjnZhTNlCiXzjH9_CoM {\n  margin-right: 5px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL {\n  background: #fff;\n  border: none;\n  font-size: inherit;\n  cursor: pointer;\n  color: #777;\n  border-radius: 0;\n  padding: 5px 10px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:hover {\n  color: #000;\n  background: #f6f6f6;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL._2WHfJ-FniXIbA-Y_-IM0Rc {\n  color: #000;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:disabled {\n  color: #ccc;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw::after {\n  position: absolute;\n  top: 0; right: 0; bottom: 0; left: 0;\n  background: rgba(238, 238, 238, 0.5);\n  content: '';\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div {\n  position: absolute;\n  top: 10px; right: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -1317,22 +1276,18 @@ var Prompt = function (_React$Component) {
       this.setState({ show: false });
     }
   }, {
-    key: "grabImageSrc",
-    value: function grabImageSrc() {
-      return null;
-    }
-  }, {
     key: "render",
     value: function render() {
       if (!this.state.show) {
         return null;
       }
 
-      return _react2.default.createElement(
-        "div",
-        { id: "prompt" },
-        "Test"
-      );
+      var _props = this.props,
+          name = _props.name,
+          className = _props.className;
+
+
+      return _react2.default.createElement("input", { type: "url", name: name, className: className });
     }
   }]);
 
