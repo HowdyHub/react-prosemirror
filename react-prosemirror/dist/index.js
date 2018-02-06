@@ -1104,12 +1104,13 @@ var MenuBar = function (_React$Component) {
         return null;
       }
 
-      var imagePromptProps = imagePrompt ? imagePrompt.props : {};
+      var imagePromptProps = imagePrompt ? imagePrompt.props : {},
+          ImagePrompt = imagePrompt.component;
 
       return _react2.default.createElement(
         'div',
         { className: _MenuBarModule2.default.prompt },
-        _react2.default.createElement('imagePrompt', _extends({ ref: 'imagePrompt' }, imagePromptProps))
+        _react2.default.createElement(ImagePrompt, _extends({ ref: 'imagePrompt' }, imagePromptProps))
       );
     }
   }, {
