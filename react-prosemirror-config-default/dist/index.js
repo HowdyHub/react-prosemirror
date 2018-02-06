@@ -1773,6 +1773,18 @@ var htmlSpecific = function htmlSpecific(schema) {
 };
 
 var generic = function generic(schema) {
+  var grabImageSrc = function grabImageSrc(imagePrompt) {
+    var interval = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2048;
+
+    if (imagePrompt.grabImageSrc()) {
+      return imagePrompt.grabImageSrc();
+    } else {
+      setTimeout(function () {
+        return grabImageSrc(imagePrompt, interval);
+      }, interval);
+    }
+  };
+
   return {
     image: {
       title: 'Insert image',
@@ -1783,7 +1795,7 @@ var generic = function generic(schema) {
 
         if (refs.imagePrompt) {
           refs.imagePrompt.show();
-          src = refs.imagePrompt.grabImageSrc();
+          src = grabImageSrc(refs.imagePrompt);
         } else {
           src = (0, _helpers.promptForImage)();
         }
