@@ -61,7 +61,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -219,7 +219,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(9);
+var	fixUrls = __webpack_require__(10);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -551,13 +551,13 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _prosemirrorState = __webpack_require__(5);
+var _prosemirrorState = __webpack_require__(6);
 
-var _prosemirrorView = __webpack_require__(6);
+var _prosemirrorView = __webpack_require__(7);
 
-__webpack_require__(7);
+__webpack_require__(8);
 
-__webpack_require__(10);
+__webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -633,6 +633,97 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Prompt = function (_React$Component) {
+  _inherits(Prompt, _React$Component);
+
+  function Prompt(props) {
+    _classCallCheck(this, Prompt);
+
+    var _this = _possibleConstructorReturn(this, (Prompt.__proto__ || Object.getPrototypeOf(Prompt)).call(this, props));
+
+    _this.state = { show: false };
+    return _this;
+  }
+
+  _createClass(Prompt, [{
+    key: 'show',
+    value: function show(onValueAdded) {
+      this.onValueAdded = onValueAdded;
+      this.setState({ show: true });
+    }
+  }, {
+    key: 'hide',
+    value: function hide() {
+      this.setState({ show: false });
+    }
+  }, {
+    key: 'useValue',
+    value: function useValue(ev) {
+      ev.preventDefault();
+
+      var input = ev.currentTarget.parentElement.querySelector('input');
+      if (input.checkValidity()) {
+        this.onValueAdded(input.value);
+        this.hide();
+      } else {
+        this.refs.error.classList.add('error-message');
+        this.refs.error.innerText = input.validationMessage;
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (!this.state.show) {
+        return null;
+      }
+
+      var inputProps = this.props.input,
+          buttonProps = this.props.button;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('span', { ref: 'error' }),
+        _react2.default.createElement('input', { type: 'url', name: inputProps.name, className: inputProps.className, pattern: '^(https){1}:\\/\\/.+$' }),
+        _react2.default.createElement(
+          'button',
+          { type: 'button', onClick: this.useValue.bind(this), className: buttonProps.className },
+          buttonProps.copy
+        )
+      );
+    }
+  }]);
+
+  return Prompt;
+}(_react2.default.Component);
+
+exports.default = Prompt;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _Editor = __webpack_require__(3);
 
 Object.defineProperty(exports, 'Editor', {
@@ -642,7 +733,7 @@ Object.defineProperty(exports, 'Editor', {
   }
 });
 
-var _HtmlEditor = __webpack_require__(12);
+var _HtmlEditor = __webpack_require__(13);
 
 Object.defineProperty(exports, 'HtmlEditor', {
   enumerable: true,
@@ -651,7 +742,7 @@ Object.defineProperty(exports, 'HtmlEditor', {
   }
 });
 
-var _MenuBar = __webpack_require__(15);
+var _MenuBar = __webpack_require__(16);
 
 Object.defineProperty(exports, 'MenuBar', {
   enumerable: true,
@@ -660,26 +751,35 @@ Object.defineProperty(exports, 'MenuBar', {
   }
 });
 
+var _Prompt = __webpack_require__(4);
+
+Object.defineProperty(exports, 'Prompt', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Prompt).default;
+  }
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("prosemirror-state");
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
-module.exports = require("prosemirror-view");
+module.exports = require("prosemirror-state");
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("prosemirror-view");
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(8);
+var content = __webpack_require__(9);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -725,7 +825,7 @@ if(false) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -739,7 +839,7 @@ exports.push([module.i, ".ProseMirror {\n  position: relative;\n}\n\n.ProseMirro
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 
@@ -834,11 +934,11 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(11);
+var content = __webpack_require__(12);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -884,7 +984,7 @@ if(false) {
 }
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -898,7 +998,7 @@ exports.push([module.i, ".ProseMirror {\n  font-family: -apple-system, system-ui
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -914,11 +1014,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _debounce = __webpack_require__(13);
+var _debounce = __webpack_require__(14);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
-var _prosemirrorModel = __webpack_require__(14);
+var _prosemirrorModel = __webpack_require__(15);
 
 var _Editor = __webpack_require__(3);
 
@@ -1006,19 +1106,19 @@ var HtmlEditor = function (_React$Component) {
 exports.default = HtmlEditor;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("lodash/debounce");
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("prosemirror-model");
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1036,19 +1136,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _map = __webpack_require__(16);
+var _map = __webpack_require__(17);
 
 var _map2 = _interopRequireDefault(_map);
 
-var _classnames3 = __webpack_require__(17);
+var _classnames3 = __webpack_require__(18);
 
 var _classnames4 = _interopRequireDefault(_classnames3);
 
-var _MenuBarModule = __webpack_require__(18);
+var _MenuBarModule = __webpack_require__(19);
 
 var _MenuBarModule2 = _interopRequireDefault(_MenuBarModule);
 
-var _Prompt = __webpack_require__(20);
+var _Prompt = __webpack_require__(4);
 
 var _Prompt2 = _interopRequireDefault(_Prompt);
 
@@ -1148,23 +1248,23 @@ var MenuBar = function (_React$Component) {
 exports.default = MenuBar;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = require("lodash/map");
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = require("classnames");
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(19);
+var content = __webpack_require__(20);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -1210,7 +1310,7 @@ if(false) {
 }
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -1218,7 +1318,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "._18REez13sPdqyVdjc8KyiG {\n  margin-bottom: 5px;\n  display: flex;\n  align-items: baseline;\n}\n\n._28CIjnZhTNlCiXzjH9_CoM {\n  margin-right: 5px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL {\n  background: #fff;\n  border: none;\n  font-size: inherit;\n  cursor: pointer;\n  color: #777;\n  border-radius: 0;\n  padding: 5px 10px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:hover {\n  color: #000;\n  background: #f6f6f6;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL._2WHfJ-FniXIbA-Y_-IM0Rc {\n  color: #000;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:disabled {\n  color: #ccc;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div {\n  position: absolute;\n  top: 10px; right: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw._2WHfJ-FniXIbA-Y_-IM0Rc::before {\n  position: absolute;\n  top: 0; right: 0; bottom: 0; left: 0;\n  background: rgba(238, 238, 238, 0.5);\n  content: '';\n  z-index: 1;\n}\n", ""]);
+exports.push([module.i, "._18REez13sPdqyVdjc8KyiG {\n  margin-bottom: 5px;\n  display: flex;\n  align-items: baseline;\n}\n\n._28CIjnZhTNlCiXzjH9_CoM {\n  margin-right: 5px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL {\n  background: #fff;\n  border: none;\n  font-size: inherit;\n  cursor: pointer;\n  color: #777;\n  border-radius: 0;\n  padding: 5px 10px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:hover {\n  color: #000;\n  background: #f6f6f6;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL._2WHfJ-FniXIbA-Y_-IM0Rc {\n  color: #000;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:disabled {\n  color: #ccc;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div {\n  position: absolute;\n  top: 10px; right: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div ._1tgt2NnNuO9gu9XeSsatzd {\n  display: block;\n  color: red;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw._2WHfJ-FniXIbA-Y_-IM0Rc::before {\n  position: absolute;\n  top: 0; right: 0; bottom: 0; left: 0;\n  background: rgba(238, 238, 238, 0.5);\n  content: '';\n  z-index: 1;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -1226,97 +1326,9 @@ exports.locals = {
 	"group": "_28CIjnZhTNlCiXzjH9_CoM",
 	"button": "_1D-5A2zE6ulZzCSsQaxnbL",
 	"active": "_2WHfJ-FniXIbA-Y_-IM0Rc",
-	"prompt": "_3Y18xWtmRC6mybk9g2iRZw"
+	"prompt": "_3Y18xWtmRC6mybk9g2iRZw",
+	"error-message": "_1tgt2NnNuO9gu9XeSsatzd"
 };
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Prompt = function (_React$Component) {
-  _inherits(Prompt, _React$Component);
-
-  function Prompt(props) {
-    _classCallCheck(this, Prompt);
-
-    var _this = _possibleConstructorReturn(this, (Prompt.__proto__ || Object.getPrototypeOf(Prompt)).call(this, props));
-
-    _this.state = { show: false };
-    return _this;
-  }
-
-  _createClass(Prompt, [{
-    key: 'show',
-    value: function show(onValueAdded) {
-      this.onValueAdded = onValueAdded;
-      this.setState({ show: true });
-    }
-  }, {
-    key: 'hide',
-    value: function hide() {
-      this.setState({ show: false });
-    }
-  }, {
-    key: 'useValue',
-    value: function useValue(ev) {
-      ev.preventDefault();
-
-      var value = ev.currentTarget.querySelector('input').value;
-      this.onValueAdded(value);
-      this.hide();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      if (!this.state.show) {
-        return null;
-      }
-
-      var inputProps = this.props.input,
-          buttonProps = this.props.button;
-
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'form',
-          { id: 'prompt', onSubmit: this.useValue.bind(this) },
-          _react2.default.createElement('input', { type: 'url', name: inputProps.name, className: inputProps.className }),
-          _react2.default.createElement(
-            'button',
-            { type: 'submit', form: 'prompt', className: inputProps.className },
-            buttonProps.copy
-          )
-        )
-      );
-    }
-  }]);
-
-  return Prompt;
-}(_react2.default.Component);
-
-exports.default = Prompt;
 
 /***/ })
 /******/ ]);
