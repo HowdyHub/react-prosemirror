@@ -668,6 +668,11 @@ var Prompt = function (_React$Component) {
   }, {
     key: 'hide',
     value: function hide() {
+      var ev = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (ev) {
+        ev.preventDefault();
+      }
       this.setState({ show: false });
     }
   }, {
@@ -697,8 +702,13 @@ var Prompt = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(
+          'a',
+          { href: '#', onClick: this.hide.bind(this), className: 'close-prompt' },
+          'X'
+        ),
         _react2.default.createElement('span', { ref: 'error' }),
-        _react2.default.createElement('input', { type: 'url', name: inputProps.name, className: inputProps.className, pattern: '^(https){1}:\\/\\/.+$' }),
+        _react2.default.createElement('input', { type: 'url', required: true, name: inputProps.name, className: inputProps.className, pattern: '^(https){1}:\\/\\/.+$' }),
         _react2.default.createElement(
           'button',
           { type: 'button', onClick: this.useValue.bind(this), className: buttonProps.className },
@@ -711,6 +721,16 @@ var Prompt = function (_React$Component) {
   return Prompt;
 }(_react2.default.Component);
 
+Prompt.defaultProps = {
+  inputProps: {
+    name: 'linkUrl',
+    className: 'input'
+  },
+  buttonProps: {
+    className: 'button',
+    copy: 'Add'
+  }
+};
 exports.default = Prompt;
 
 /***/ }),
@@ -1318,7 +1338,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "._18REez13sPdqyVdjc8KyiG {\n  margin-bottom: 5px;\n  display: flex;\n  align-items: baseline;\n}\n\n._28CIjnZhTNlCiXzjH9_CoM {\n  margin-right: 5px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL {\n  background: #fff;\n  border: none;\n  font-size: inherit;\n  cursor: pointer;\n  color: #777;\n  border-radius: 0;\n  padding: 5px 10px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:hover {\n  color: #000;\n  background: #f6f6f6;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL._2WHfJ-FniXIbA-Y_-IM0Rc {\n  color: #000;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:disabled {\n  color: #ccc;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div {\n  position: absolute;\n  top: 10px; right: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div ._1tgt2NnNuO9gu9XeSsatzd {\n  display: block;\n  color: red;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw._2WHfJ-FniXIbA-Y_-IM0Rc::before {\n  position: absolute;\n  top: 0; right: 0; bottom: 0; left: 0;\n  background: rgba(238, 238, 238, 0.5);\n  content: '';\n  z-index: 1;\n}\n", ""]);
+exports.push([module.i, "._18REez13sPdqyVdjc8KyiG {\n  margin-bottom: 5px;\n  display: flex;\n  align-items: baseline;\n}\n\n._28CIjnZhTNlCiXzjH9_CoM {\n  margin-right: 5px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL {\n  background: #fff;\n  border: none;\n  font-size: inherit;\n  cursor: pointer;\n  color: #777;\n  border-radius: 0;\n  padding: 5px 10px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:hover {\n  color: #000;\n  background: #f6f6f6;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL._2WHfJ-FniXIbA-Y_-IM0Rc {\n  color: #000;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:disabled {\n  color: #ccc;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div {\n  display: flex;\n  position: absolute;\n  top: 10px; right: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div button {\n  align-self: flex-end;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div .W65uj3krZvaMjcrSXitQc {\n  position: absolute;\n  right: 10px;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div ._1tgt2NnNuO9gu9XeSsatzd {\n  display: block;\n  color: red;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw._2WHfJ-FniXIbA-Y_-IM0Rc::before {\n  position: absolute;\n  top: 0; right: 0; bottom: 0; left: 0;\n  background: rgba(238, 238, 238, 0.5);\n  content: '';\n  z-index: 1;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -1327,6 +1347,7 @@ exports.locals = {
 	"button": "_1D-5A2zE6ulZzCSsQaxnbL",
 	"active": "_2WHfJ-FniXIbA-Y_-IM0Rc",
 	"prompt": "_3Y18xWtmRC6mybk9g2iRZw",
+	"close-prompt": "W65uj3krZvaMjcrSXitQc",
 	"error-message": "_1tgt2NnNuO9gu9XeSsatzd"
 };
 
