@@ -1262,21 +1262,28 @@ var Prompt = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Prompt.__proto__ || Object.getPrototypeOf(Prompt)).call(this, props));
 
-    _this.state = {
-      show: false
-    };
+    _this.state = { show: false };
     return _this;
   }
 
   _createClass(Prompt, [{
     key: "show",
-    value: function show() {
+    value: function show(onValueAdded) {
+      this.onValueAdded = onValueAdded;
       this.setState({ show: true });
     }
   }, {
     key: "hide",
     value: function hide() {
       this.setState({ show: false });
+    }
+  }, {
+    key: "useValue",
+    value: function useValue(ev) {
+      ev.preventDefault();
+
+      debugger;
+      this.onValueAdded();
     }
   }, {
     key: "render",
@@ -1293,7 +1300,12 @@ var Prompt = function (_React$Component) {
       return _react2.default.createElement(
         "div",
         null,
-        _react2.default.createElement("input", { type: "url", name: name, className: className })
+        _react2.default.createElement("input", { type: "url", name: name, className: className }),
+        _react2.default.createElement(
+          "button",
+          { type: "button", onClick: this.useValue.bind(this) },
+          "Add"
+        )
       );
     }
   }]);
