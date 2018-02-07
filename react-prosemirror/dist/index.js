@@ -1267,44 +1267,47 @@ var Prompt = function (_React$Component) {
   }
 
   _createClass(Prompt, [{
-    key: "show",
+    key: 'show',
     value: function show(onValueAdded) {
       this.onValueAdded = onValueAdded;
       this.setState({ show: true });
     }
   }, {
-    key: "hide",
+    key: 'hide',
     value: function hide() {
       this.setState({ show: false });
     }
   }, {
-    key: "useValue",
+    key: 'useValue',
     value: function useValue(ev) {
       ev.preventDefault();
 
-      debugger;
-      this.onValueAdded();
+      var value = ev.currentTarget.querySelector('input').value;
+      this.onValueAdded(value);
+      this.hide();
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       if (!this.state.show) {
         return null;
       }
 
-      var _props = this.props,
-          name = _props.name,
-          className = _props.className;
-
+      var inputProps = this.props.input,
+          buttonProps = this.props.button;
 
       return _react2.default.createElement(
-        "div",
+        'div',
         null,
-        _react2.default.createElement("input", { type: "url", name: name, className: className }),
         _react2.default.createElement(
-          "button",
-          { type: "button", onClick: this.useValue.bind(this) },
-          "Add"
+          'form',
+          { id: 'prompt', onSubmit: this.useValue.bind(this) },
+          _react2.default.createElement('input', { type: 'url', name: inputProps.name, className: inputProps.className }),
+          _react2.default.createElement(
+            'button',
+            { type: 'submit', form: 'prompt', className: inputProps.className },
+            buttonProps.copy
+          )
         )
       );
     }
