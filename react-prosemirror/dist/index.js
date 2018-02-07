@@ -61,7 +61,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -219,7 +219,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(10);
+var	fixUrls = __webpack_require__(11);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -551,13 +551,13 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _prosemirrorState = __webpack_require__(6);
+var _prosemirrorState = __webpack_require__(7);
 
-var _prosemirrorView = __webpack_require__(7);
+var _prosemirrorView = __webpack_require__(8);
 
-__webpack_require__(8);
+__webpack_require__(9);
 
-__webpack_require__(11);
+__webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -626,6 +626,56 @@ exports.default = Editor;
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
+
+var content = __webpack_require__(20);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(2)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {
+	module.hot.accept("!!../node_modules/css-loader/index.js??ref--0-oneOf-1-1!./MenuBar.module.css", function() {
+		var newContent = require("!!../node_modules/css-loader/index.js??ref--0-oneOf-1-1!./MenuBar.module.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -638,6 +688,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _MenuBarModule = __webpack_require__(4);
+
+var _MenuBarModule2 = _interopRequireDefault(_MenuBarModule);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -722,11 +776,11 @@ var Prompt = function (_React$Component) {
 }(_react2.default.Component);
 
 Prompt.defaultProps = {
-  inputProps: {
+  input: {
     name: 'linkUrl',
     className: 'input'
   },
-  buttonProps: {
+  button: {
     className: 'button',
     copy: 'Add'
   }
@@ -734,7 +788,7 @@ Prompt.defaultProps = {
 exports.default = Prompt;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -753,7 +807,7 @@ Object.defineProperty(exports, 'Editor', {
   }
 });
 
-var _HtmlEditor = __webpack_require__(13);
+var _HtmlEditor = __webpack_require__(14);
 
 Object.defineProperty(exports, 'HtmlEditor', {
   enumerable: true,
@@ -762,7 +816,7 @@ Object.defineProperty(exports, 'HtmlEditor', {
   }
 });
 
-var _MenuBar = __webpack_require__(16);
+var _MenuBar = __webpack_require__(17);
 
 Object.defineProperty(exports, 'MenuBar', {
   enumerable: true,
@@ -771,7 +825,7 @@ Object.defineProperty(exports, 'MenuBar', {
   }
 });
 
-var _Prompt = __webpack_require__(4);
+var _Prompt = __webpack_require__(5);
 
 Object.defineProperty(exports, 'Prompt', {
   enumerable: true,
@@ -783,23 +837,23 @@ Object.defineProperty(exports, 'Prompt', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("prosemirror-state");
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("prosemirror-view");
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(9);
+var content = __webpack_require__(10);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -845,7 +899,7 @@ if(false) {
 }
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -859,7 +913,7 @@ exports.push([module.i, ".ProseMirror {\n  position: relative;\n}\n\n.ProseMirro
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 
@@ -954,11 +1008,11 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(12);
+var content = __webpack_require__(13);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -1004,7 +1058,7 @@ if(false) {
 }
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -1018,7 +1072,7 @@ exports.push([module.i, ".ProseMirror {\n  font-family: -apple-system, system-ui
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1034,11 +1088,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _debounce = __webpack_require__(14);
+var _debounce = __webpack_require__(15);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
-var _prosemirrorModel = __webpack_require__(15);
+var _prosemirrorModel = __webpack_require__(16);
 
 var _Editor = __webpack_require__(3);
 
@@ -1126,19 +1180,19 @@ var HtmlEditor = function (_React$Component) {
 exports.default = HtmlEditor;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("lodash/debounce");
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 module.exports = require("prosemirror-model");
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1156,19 +1210,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _map = __webpack_require__(17);
+var _map = __webpack_require__(18);
 
 var _map2 = _interopRequireDefault(_map);
 
-var _classnames3 = __webpack_require__(18);
+var _classnames3 = __webpack_require__(19);
 
 var _classnames4 = _interopRequireDefault(_classnames3);
 
-var _MenuBarModule = __webpack_require__(19);
+var _MenuBarModule = __webpack_require__(4);
 
 var _MenuBarModule2 = _interopRequireDefault(_MenuBarModule);
 
-var _Prompt = __webpack_require__(4);
+var _Prompt = __webpack_require__(5);
 
 var _Prompt2 = _interopRequireDefault(_Prompt);
 
@@ -1268,66 +1322,16 @@ var MenuBar = function (_React$Component) {
 exports.default = MenuBar;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = require("lodash/map");
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("classnames");
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(20);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(2)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {
-	module.hot.accept("!!../node_modules/css-loader/index.js??ref--0-oneOf-1-1!./MenuBar.module.css", function() {
-		var newContent = require("!!../node_modules/css-loader/index.js??ref--0-oneOf-1-1!./MenuBar.module.css");
-
-		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-
-		var locals = (function(a, b) {
-			var key, idx = 0;
-
-			for(key in a) {
-				if(!b || a[key] !== b[key]) return false;
-				idx++;
-			}
-
-			for(key in b) idx--;
-
-			return idx === 0;
-		}(content.locals, newContent.locals));
-
-		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
-
-		update(newContent);
-	});
-
-	module.hot.dispose(function() { update(); });
-}
 
 /***/ }),
 /* 20 */
@@ -1338,7 +1342,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "._18REez13sPdqyVdjc8KyiG {\n  margin-bottom: 5px;\n  display: flex;\n  align-items: baseline;\n}\n\n._28CIjnZhTNlCiXzjH9_CoM {\n  margin-right: 5px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL {\n  background: #fff;\n  border: none;\n  font-size: inherit;\n  cursor: pointer;\n  color: #777;\n  border-radius: 0;\n  padding: 5px 10px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:hover {\n  color: #000;\n  background: #f6f6f6;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL._2WHfJ-FniXIbA-Y_-IM0Rc {\n  color: #000;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:disabled {\n  color: #ccc;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div {\n  display: flex;\n  position: absolute;\n  top: 10px; right: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div button {\n  align-self: flex-end;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div .W65uj3krZvaMjcrSXitQc {\n  position: absolute;\n  right: 10px;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div ._1tgt2NnNuO9gu9XeSsatzd {\n  display: block;\n  color: red;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw._2WHfJ-FniXIbA-Y_-IM0Rc::before {\n  position: absolute;\n  top: 0; right: 0; bottom: 0; left: 0;\n  background: rgba(238, 238, 238, 0.5);\n  content: '';\n  z-index: 1;\n}\n", ""]);
+exports.push([module.i, "._18REez13sPdqyVdjc8KyiG {\n  margin-bottom: 5px;\n  display: flex;\n  align-items: baseline;\n}\n\n._28CIjnZhTNlCiXzjH9_CoM {\n  margin-right: 5px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL {\n  background: #fff;\n  border: none;\n  font-size: inherit;\n  cursor: pointer;\n  color: #777;\n  border-radius: 0;\n  padding: 5px 10px;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:hover {\n  color: #000;\n  background: #f6f6f6;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL._2WHfJ-FniXIbA-Y_-IM0Rc {\n  color: #000;\n}\n\n._1D-5A2zE6ulZzCSsQaxnbL:disabled {\n  color: #ccc;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div {\n  display: flex;\n  position: absolute;\n  top: 10px; right: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div input {\n  width: 85%;\n  margin-right: 15px;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div button {\n  align-self: flex-end;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div .W65uj3krZvaMjcrSXitQc {\n  position: absolute;\n  right: 10px;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw > div ._1tgt2NnNuO9gu9XeSsatzd {\n  display: block;\n  color: red;\n}\n\n._3Y18xWtmRC6mybk9g2iRZw._2WHfJ-FniXIbA-Y_-IM0Rc::before {\n  position: absolute;\n  top: 0; right: 0; bottom: 0; left: 0;\n  background: rgba(238, 238, 238, 0.5);\n  content: '';\n  z-index: 1;\n}\n", ""]);
 
 // exports
 exports.locals = {
