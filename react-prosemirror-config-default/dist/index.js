@@ -1784,7 +1784,7 @@ var generic = function generic(schema) {
       content: _icons2.default.image,
       enable: (0, _helpers.canInsert)(schema.nodes.image),
       run: function run(state, dispatch, refs) {
-        promptForURL(refs, 'imagePrompt', function (src) {
+        (0, _helpers.promptForURL)(refs, 'imagePrompt', function (src) {
           addImage(dispatch, state, src);
         });
       }

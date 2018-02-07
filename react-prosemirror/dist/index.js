@@ -1290,7 +1290,11 @@ var Prompt = function (_React$Component) {
           className = _props.className;
 
 
-      return _react2.default.createElement("input", { type: "url", name: name, className: className });
+      return _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement("input", { type: "url", name: name, className: className })
+      );
     }
   }]);
 
