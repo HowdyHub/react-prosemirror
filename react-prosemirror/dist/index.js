@@ -1268,6 +1268,9 @@ var MenuBar = function (_React$Component) {
   return MenuBar;
 }(_react2.default.Component);
 
+MenuBar.defaultProps = {
+  prompts: []
+};
 exports.default = MenuBar;
 
 /***/ }),
@@ -1410,7 +1413,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, ".prompt > div .close-prompt {\n  position: absolute;\n  right: 10px;\n}\n\n.prompt > div .error-message {\n  display: block;\n  color: red;\n}\n\n.prompt > div {\n  display: flex;\n  position: absolute;\n  top: 10px; right: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n\n.prompt > div input {\n  width: 85%;\n  margin-right: 15px;\n}\n\n.prompt > div button {\n  align-self: flex-end;\n}\n\n.prompt.active::before {\n  position: absolute;\n  top: 0; right: 0; bottom: 0; left: 0;\n  background: rgba(238, 238, 238, 0.5);\n  content: '';\n  z-index: 1;\n}\n", ""]);
+exports.push([module.i, ".prompt > div {\n  display: flex;\n  flex-wrap: wrap;\n  position: absolute;\n  top: 10px; right: 10px; left: 10px;\n  padding: 10px 10px;\n  background: #fff; border: 1px solid #ddd;\n  z-index: 1;\n}\n\n.prompt > div input {\n  width: 85%;\n  margin-right: 15px;\n}\n\n.prompt > div button {\n  align-self: flex-end;\n}\n\n.prompt > div .close-prompt {\n  position: absolute;\n  right: 10px;\n}\n\n.prompt > div .error-message {\n  display: block;\n  color: red;\n}\n\n.prompt.active::before {\n  position: absolute;\n  top: 0; right: 0; bottom: 0; left: 0;\n  background: rgba(238, 238, 238, 0.5);\n  content: '';\n  z-index: 1;\n}\n", ""]);
 
 // exports
 
