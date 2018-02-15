@@ -194,14 +194,24 @@ var canInsert = exports.canInsert = function canInsert(type) {
   };
 };
 
-var promptForURL = exports.promptForURL = function promptForURL() {
-  var url = window && window.prompt('Enter the URL', 'https://');
+var promptForURL = exports.promptForURL = function promptForURL(refs, promptName, callback) {
+  var prompt = refs[promptName];
 
-  if (url && !/^https?:\/\//i.test(url)) {
-    url = 'https://' + url;
+  if (prompt) {
+    prompt.show(callback);
+  } else {
+    var url = window && window.prompt('Enter the URL', 'https://');
+
+    if (!url) {
+      return false;
+    }
+
+    if (url && !/^https?:\/\//i.test(url)) {
+      url = 'https://' + url;
+    }
+
+    callback(url);
   }
-
-  return url;
 };
 
 /***/ }),
@@ -1559,16 +1569,16 @@ var generic = function generic(schema) {
       enable: function enable(state) {
         return !state.selection.empty;
       },
-      run: function run(state, dispatch) {
+      run: function run(state, dispatch, refs) {
         if ((0, _helpers.markActive)(schema.marks.link)(state)) {
           (0, _prosemirrorCommands.toggleMark)(schema.marks.link)(state, dispatch);
           return true;
         }
 
-        var href = (0, _helpers.promptForURL)();
-        if (!href) return false;
+        (0, _helpers.promptForURL)(refs, 'linkPrompt', function (href) {
+          (0, _prosemirrorCommands.toggleMark)(schema.marks.link, { href: href })(state, dispatch);
+        });
 
-        (0, _prosemirrorCommands.toggleMark)(schema.marks.link, { href: href })(state, dispatch);
         // view.focus()
       }
     }
@@ -1763,17 +1773,20 @@ var htmlSpecific = function htmlSpecific(schema) {
 };
 
 var generic = function generic(schema) {
+  var addImage = function addImage(dispatch, state, src) {
+    var img = schema.nodes.image.createAndFill({ src: src });
+    dispatch(state.tr.replaceSelectionWith(img));
+  };
+
   return {
     image: {
       title: 'Insert image',
       content: _icons2.default.image,
       enable: (0, _helpers.canInsert)(schema.nodes.image),
-      run: function run(state, dispatch) {
-        var src = (0, _helpers.promptForURL)();
-        if (!src) return false;
-
-        var img = schema.nodes.image.createAndFill({ src: src });
-        dispatch(state.tr.replaceSelectionWith(img));
+      run: function run(state, dispatch, refs) {
+        (0, _helpers.promptForURL)(refs, 'imagePrompt', function (src) {
+          addImage(dispatch, state, src);
+        });
       }
     }
     // hr: {
