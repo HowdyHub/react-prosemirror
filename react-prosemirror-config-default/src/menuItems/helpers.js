@@ -30,12 +30,20 @@ export const canInsert = type => state => {
   return false
 }
 
-export const promptForURL = () => {
-  let url = window && window.prompt('Enter the URL', 'https://')
+export const promptForURL = (refs, promptName, callback) => {
+  let prompt = refs[promptName];
 
-  if (url && !/^https?:\/\//i.test(url)) {
-    url = 'https://' + url
+  if(prompt) {
+    prompt.show(callback);
+  } else {
+    let url = window && window.prompt('Enter the URL', 'https://')
+
+    if(!url) { return false; }
+
+    if (url && !/^https?:\/\//i.test(url)) {
+      url = 'https://' + url
+    }
+
+    callback(url);
   }
-
-  return url
 }

@@ -56,16 +56,16 @@ const generic = (schema) => {
       content: icons.link,
       active: markActive(schema.marks.link),
       enable: state => !state.selection.empty,
-      run (state, dispatch) {
+      run (state, dispatch, refs) {
         if (markActive(schema.marks.link)(state)) {
           toggleMark(schema.marks.link)(state, dispatch)
           return true
         }
 
-        const href = promptForURL()
-        if (!href) return false
+        promptForURL(refs, 'linkPrompt', (href) => {
+          toggleMark(schema.marks.link, { href })(state, dispatch)
+        });
 
-        toggleMark(schema.marks.link, { href })(state, dispatch)
         // view.focus()
       }
     }

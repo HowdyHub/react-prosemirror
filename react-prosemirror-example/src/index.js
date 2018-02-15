@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
-import { Editor, MenuBar } from '@aeaton/react-prosemirror'
+import { Editor, MenuBar } from 'prosemirror-howdy-wip/react-prosemirror'
 import { options, menu } from 'prosemirror-howdy-wip/react-prosemirror-config-default'
 
 const Container = styled('div')`
